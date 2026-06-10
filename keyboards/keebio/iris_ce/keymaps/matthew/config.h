@@ -12,9 +12,10 @@
 // the tapping term. Greatly improves rolling typing with home row mods.
 #define PERMISSIVE_HOLD
 
-// Treat a hold immediately after a tap as a hold (modifier) instead of an
-// auto-repeat of the tapped key. Prevents e.g. holding "A" from spamming "aaaa".
-#define QUICK_TAP_TERM 0
+// Within this window after a tap, holding the same key repeats the tap instead
+// of acting as a modifier -- allows tap-then-hold auto-repeat while still
+// keeping home row mods responsive.
+#define QUICK_TAP_TERM 120
 
 // ----- Tri-layer layer indices -----
 // Base layers (_QWERTY = 0, _COLEMAK = 1) sit below the momentary layers, so
