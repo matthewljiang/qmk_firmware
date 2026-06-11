@@ -25,7 +25,7 @@ layers:
   - O
   - P
   - DEL
-  - LCTL
+  - ESC
   - {t: A, h: LCTL}
   - {t: S, h: LALT}
   - {t: D, h: LGUI}
@@ -82,7 +82,7 @@ layers:
   - Y
   - ;
   - DEL
-  - LCTL
+  - ESC
   - {t: A, h: LCTL}
   - {t: R, h: LALT}
   - {t: S, h: LGUI}
