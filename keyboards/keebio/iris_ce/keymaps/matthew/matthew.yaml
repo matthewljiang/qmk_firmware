@@ -51,7 +51,7 @@ layers:
   - .
   - /
   - RSFT
-  - LGUI
+  - LT( WM,LGUI)
   - LT( LOWER,SPC)
   - LT( NAV,ENT)
   - LT( SYM,BSPC)
@@ -75,7 +75,7 @@ layers:
   - W
   - F
   - P
-  - G
+  - B
   - J
   - L
   - U
@@ -87,8 +87,8 @@ layers:
   - {t: R, h: LALT}
   - {t: S, h: LGUI}
   - {t: T, h: LSFT}
-  - D
-  - H
+  - G
+  - M
   - {t: N, h: RSFT}
   - {t: E, h: RGUI}
   - {t: I, h: LALT}
@@ -98,72 +98,72 @@ layers:
   - Z
   - X
   - C
+  - D
   - V
-  - B
   - HOME
   - END
   - K
-  - M
+  - H
   - ','
   - .
   - /
   - RSFT
-  - LGUI
+  - LT( WM,LGUI)
   - LT( LOWER,SPC)
   - LT( NAV,ENT)
   - LT( SYM,BSPC)
   - LT( RAISE,SPC)
   - RALT
   Lower:
-  - '~'
-  - '!'
-  - '@'
-  - '#'
-  - $
-  - '%'
-  - ^
-  - '&'
-  - '*'
-  - (
-  - )
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - PGUP
-  - '`'
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - UP
   - {t: ▽, type: trans}
   - QK BOOT
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - PSLS
   - P7
   - P8
   - P9
-  - P0
+  - {t: ▽, type: trans}
   - PGDN
   - DEL
   - LEFT
   - DOWN
   - RGHT
   - {t: ▽, type: trans}
-  - '['
-  - ']'
+  - {t: ▽, type: trans}
+  - PAST
   - P4
   - P5
   - P6
-  - +
-  - '|'
+  - PPLS
+  - {t: ▽, type: trans}
   - RM NEXT
   - EE CLR
   - DF( QWERTY)
   - DF( COLEMAK)
   - {t: ▽, type: trans}
-  - '{'
-  - (
-  - )
-  - '}'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - PMNS
   - P1
   - P2
   - P3
-  - '-'
+  - PDOT
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -299,35 +299,92 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - '`'
-  - '{'
-  - '}'
-  - '@'
-  - $
-  - '%'
   - '#'
-  - ^
+  - '*'
+  - +
+  - '['
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ']'
+  - '-'
+  - {t: ▽, type: trans}
+  - '@'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - <
+  - '{'
+  - (
+  - '='
+  - '|'
+  - )
+  - '}'
   - '>'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - '~'
-  - (
-  - )
-  - '='
-  - +
-  - '!'
-  - '-'
-  - _
-  - '*'
-  - /
-  - '?'
   - {t: ▽, type: trans}
-  - '|'
-  - '['
-  - ']'
+  - '%'
   - \
+  - _
+  - '!'
+  - $
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '`'
   - '&'
+  - {t: ▽, type: trans}
+  - ^
+  - '~'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  WM:
+  - QK LLCK
+  - C(A(1))
+  - C(A(2))
+  - C(A(3))
+  - C(A(4))
+  - C(A(5))
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - C(A(S(1)))
+  - C(A(S(2)))
+  - C(A(S(3)))
+  - C(A(S(4)))
+  - C(A(S(5)))
+  - C(A(S(←)))
+  - C(A(S(↓)))
+  - C(A(S(↑)))
+  - C(A(S(→)))
+  - C(A(TAB))
+  - C(A(F))
+  - {t: ▽, type: trans}
+  - C(A(ENT))
+  - C(A(S))
+  - C(A(S(SPC)))
+  - {t: ▽, type: trans}
+  - C(A(G))
+  - C(A(←))
+  - C(A(↓))
+  - C(A(↑))
+  - C(A(→))
+  - C(A(-))
+  - C(A(=))
+  - {t: ▽, type: trans}
+  - C(A(Z))
+  - C(A(Q))
+  - C(A(O))
+  - C(A(P))
+  - C(A(/))
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
