@@ -43,19 +43,19 @@ layers:
   - C
   - V
   - B
-  - HOME
-  - END
+  - {t: HOME, h: LOWER}
+  - {t: END, h: RAISE}
   - N
   - M
   - ','
   - .
   - /
   - RSFT
-  - LT( WM,LGUI)
-  - LT( LOWER,SPC)
-  - LT( NAV,ENT)
+  - LGUI
+  - {t: SPC, h: WM}
+  - ENT
   - LT( SYM,BSPC)
-  - LT( RAISE,SPC)
+  - {t: SPC, h: NAV}
   - RALT
   Colemak:
   - QK GESC
@@ -100,19 +100,19 @@ layers:
   - C
   - D
   - V
-  - HOME
-  - END
+  - {t: HOME, h: LOWER}
+  - {t: END, h: RAISE}
   - K
   - H
   - ','
   - .
   - /
   - RSFT
-  - LT( WM,LGUI)
-  - LT( LOWER,SPC)
-  - LT( NAV,ENT)
+  - LGUI
+  - {t: SPC, h: WM}
+  - ENT
   - LT( SYM,BSPC)
-  - LT( RAISE,SPC)
+  - {t: SPC, h: NAV}
   - RALT
   Lower:
   - {t: ▽, type: trans}
