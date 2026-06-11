@@ -96,15 +96,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Nav layer -- hold left thumb (Enter). Vim HJKL arrows live on the right-hand
   // home row; the left-hand home row keeps the CAGS mods so you can Shift/Cmd/Opt
   // + arrow to select. Word-jump (Opt+arrow) and PgUp/PgDn sit above the arrows.
+  //
+  // Editing additions (macOS):
+  //   Left top row : delete to line-start (Cmd+Bksp), delete word back/fwd
+  //                  (Opt+Bksp / Opt+Del), delete to line-end (Ctrl+K).
+  //   Left bottom  : Cmd+Z/X/C/V undo/cut/copy/paste on the real Z X C V keys,
+  //                  redo (Cmd+Shift+Z) on B.
+  //   Right top    : OSM(Shift) -- tap it, then any movement key (arrow,
+  //                  word-jump, Home/End) extends a selection ("shift a word").
+  //   Right bottom : Cmd+A select-all.
+  //
+  // Layer lock: tap QK_LLCK (top-left / Esc position) while NAV is held to keep
+  // it on hands-free; tap it again to release. The board glows green while NAV
+  // is locked so you can't forget you're in the (destructive) editing mode.
   [_NAV] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______,    _______, _______, _______,    _______, _______,
+     QK_LLCK, _______,     _______,     _______,    _______,     _______,            _______,    _______, _______, _______,    _______,        _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            A(KC_LEFT), KC_PGDN, KC_PGUP, A(KC_RGHT), _______, KC_DEL,
+     _______, G(KC_BSPC),  A(KC_BSPC),  A(KC_DEL),  C(KC_K),     _______,            A(KC_LEFT), KC_PGDN, KC_PGUP, A(KC_RGHT), OSM(MOD_LSFT),  KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,                            KC_LEFT,    KC_DOWN, KC_UP,   KC_RGHT,    KC_HOME, KC_END,
+     _______, KC_LCTL,     KC_LALT,     KC_LGUI,    KC_LSFT,     _______,            KC_LEFT,    KC_DOWN, KC_UP,   KC_RGHT,    KC_HOME,        KC_END,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______, _______,          _______, _______,   _______, _______, _______,    _______, _______,
+     _______, G(KC_Z),     G(KC_X),     G(KC_C),    G(KC_V),     SGUI(KC_Z), _______,  _______, G(KC_A),   _______, _______,    _______,        _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -128,18 +141,66 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-// Indicate the active base layer with a solid RGB color:
+// Set a solid color from an HSV_* macro while KEEPING the current brightness.
+// The macro's value component is intentionally ignored and replaced with
+// rgb_matrix_get_val(), so RM_VALU/RM_VALD adjustments survive layer changes.
+static void set_solid_hs(uint8_t hue, uint8_t sat, uint8_t val) {
+    (void)val;  // discard the macro's full-brightness value
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    rgb_matrix_sethsv_noeeprom(hue, sat, rgb_matrix_get_val());
+}
+
+// Paint the solid RGB color for the active base layer:
 //   _QWERTY  -> red
 //   _COLEMAK -> blue
-layer_state_t default_layer_state_set_user(layer_state_t state) {
-    switch (get_highest_layer(state)) {
+static void apply_base_layer_rgb(void) {
+    switch (get_highest_layer(default_layer_state)) {
         case _COLEMAK:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-            rgb_matrix_sethsv_noeeprom(HSV_BLUE);
+            set_solid_hs(HSV_BLUE);
             break;
         case _QWERTY:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-            rgb_matrix_sethsv_noeeprom(HSV_RED);
+            set_solid_hs(HSV_RED);
+            break;
+    }
+}
+
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    apply_base_layer_rgb();
+    return state;
+}
+
+// While the NAV layer is locked, glow green as a "you're in editing mode"
+// warning; restore the base-layer color when it unlocks.
+bool layer_lock_set_user(layer_state_t locked_layers) {
+    if (is_layer_locked(_NAV)) {
+        set_solid_hs(HSV_GREEN);
+    } else {
+        apply_base_layer_rgb();
+    }
+    return true;
+}
+
+// Tint the board to match whichever momentary layer is active. Locked NAV keeps
+// its green indicator (handled above), so bail out early when it's locked.
+layer_state_t layer_state_set_user(layer_state_t state) {
+    if (is_layer_locked(_NAV)) {
+        return state;
+    }
+    switch (get_highest_layer(state)) {
+        case _LOWER:
+            set_solid_hs(HSV_ORANGE);
+            break;
+        case _RAISE:
+            set_solid_hs(HSV_TEAL);
+            break;
+        case _NAV:
+            set_solid_hs(HSV_GREEN);
+            break;
+        case _SYM:
+            set_solid_hs(HSV_GOLD);
+            break;
+        default:  // back on a base layer
+            apply_base_layer_rgb();
             break;
     }
     return state;
