@@ -106,12 +106,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                  word-jump, Home/End) extends a selection ("shift a word").
   //   Right bottom : Cmd+A select-all.
   //
+  // Window resize (above the right-hand arrows): Alt+- shrinks, Alt+= grows,
+  // matching the window manager's resize shortcuts.
+  //
   // Layer lock: tap QK_LLCK (top-left / Esc position) while NAV is held to keep
   // it on hands-free; tap it again to release. The board glows green while NAV
   // is locked so you can't forget you're in the (destructive) editing mode.
   [_NAV] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_LLCK, _______,     _______,     _______,    _______,     _______,            _______,    _______, _______, _______,    _______,        _______,
+     QK_LLCK, _______,     _______,     _______,    _______,     _______,            _______,    A(KC_MINS), A(KC_EQL), _______, _______,        _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, G(KC_BSPC),  A(KC_BSPC),  A(KC_DEL),  C(KC_K),     _______,            A(KC_LEFT), KC_PGDN, KC_PGUP, A(KC_RGHT), OSM(MOD_LSFT),  KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤

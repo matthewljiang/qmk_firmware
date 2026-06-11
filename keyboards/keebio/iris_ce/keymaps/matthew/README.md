@@ -51,9 +51,12 @@ Board glows **green** while NAV is active.
 
 ### Movement (right hand)
 ```
+            ⌥- ⌥=                     window shrink / grow (top row, above ↓↑)
         ⌥←  PgDn PgUp ⌥→              word-jump + page (top row)
          ←   ↓    ↑    →   Home End   arrows + line ends (home row)
 ```
+
+`⌥-` / `⌥=` resize the focused window (Alt+minus / Alt+equals).
 
 ### Editing (left hand)
 | Key (Colemak) | Action |
