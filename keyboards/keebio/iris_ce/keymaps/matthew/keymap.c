@@ -207,6 +207,13 @@ static void apply_base_layer_rgb(void) {
     }
 }
 
+// Boot into Colemak every time the board is plugged in. The DF(_QWERTY) /
+// DF(_COLEMAK) keys still switch layouts at runtime, but the choice is not
+// persisted -- a reset always comes back up on Colemak.
+void keyboard_post_init_user(void) {
+    default_layer_set((layer_state_t)1 << _COLEMAK);
+}
+
 layer_state_t default_layer_state_set_user(layer_state_t state) {
     apply_base_layer_rgb();
     return state;
