@@ -6,12 +6,10 @@
 enum custom_layers {
      _QWERTY,
      _COLEMAK,
-     _LOWER,
-     _RAISE,
+     _FN,
      _NAV,
      _SYM,
-     _WM,
-     _VIM
+     _WM
 };
 
 // Home row mods (CAGS: Ctrl, Alt, GUI/Cmd, Shift) -- tuned for macOS
@@ -41,57 +39,54 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_NO,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
+     KC_NO,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC,  HOME_A,  HOME_S,  HOME_D,  HOME_F,  KC_G,                               KC_H,    HOME_J,  HOME_K,  HOME_L,  HOME_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    LT(_LOWER,KC_HOME),  LT(_RAISE,KC_END), KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    LT(_FN,KC_HOME),  LT(_FN,KC_END), KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LGUI, LT(_WM,KC_SPC), LT(_VIM,KC_ENT), LT(_SYM,KC_BSPC), LT(_NAV,KC_SPC), KC_RALT
+                                    KC_LGUI, LT(_WM,KC_TAB), KC_ENT, LT(_SYM,KC_BSPC), LT(_NAV,KC_SPC), KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ), // _QWERTY thumbs: LT(_WM, KC_LGUI) replaces plain LGUI on the left outer
+  ), // thumbs (both bases): LGUI · WM/Tab · Enter | Bksp/SYM · Space/NAV · RALT
 
   [_COLEMAK] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_NO,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                               KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_DEL,
+     KC_NO,   KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                               KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC,  COLE_A,  COLE_R,  COLE_S,  COLE_T,  KC_G,                               KC_M,    COLE_N,  COLE_E,  COLE_I,  COLE_O,  KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    LT(_LOWER,KC_HOME),  LT(_RAISE,KC_END), KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    LT(_FN,KC_HOME),  LT(_FN,KC_END), KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LGUI, LT(_WM,KC_SPC), LT(_VIM,KC_ENT), LT(_SYM,KC_BSPC), LT(_NAV,KC_SPC), KC_RALT
+                                    KC_LGUI, LT(_WM,KC_TAB), KC_ENT, LT(_SYM,KC_BSPC), LT(_NAV,KC_SPC), KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  [_LOWER] = LAYOUT(
-  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, KC_PGUP,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, KC_UP,   _______, QK_BOOT, _______,                            KC_PSLS, KC_P7,   KC_P8,   KC_P9,   _______, KC_PGDN,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_DEL,  KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,                            KC_PAST, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, _______,
-  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     RM_NEXT, EE_CLR,  DF(_QWERTY), DF(_COLEMAK), _______, _______, _______,    _______, KC_PMNS, KC_P1,   KC_P2,   KC_P3,   KC_PDOT, _______,
-  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, KC_DEL,                    KC_DEL,  _______, KC_P0
-                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ),
-
-  [_RAISE] = LAYOUT(
+  // Function / numpad / system layer -- hold either bottom-inner key (Home on the
+  // left, End on the right) to reach it from either hand. This merges the old
+  // LOWER and RAISE layers; anything already reachable on SYM (symbols) or NAV
+  // (arrows, Home/End, PgUp/PgDn) was dropped so nothing is duplicated.
+  //   Number row : F1-F12.
+  //   Right hand : numpad -- 7 8 9 / 4 5 6 / 1 2 3 with 0 on the right thumb, and
+  //                / * - + . operators in the inner/outer columns.
+  //   Left hand  : media transport + volume on the home/upper rows, RGB controls
+  //                on the upper (hue/sat/val UP) and bottom (hue/sat/val DOWN) rows.
+  //   System     : QK_BOOT / EE_CLR on the right inner-outer column, and the
+  //                DF(_QWERTY)/DF(_COLEMAK) layout switches on the left bottom row.
+  [_FN] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RM_TOGG, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, QK_BOOT,
+     RM_TOGG, RM_HUEU, RM_SATU, RM_VALU, RM_NEXT, KC_VOLU,                            KC_PSLS, KC_P7,   KC_P8,   KC_P9,   KC_PMNS, QK_BOOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RM_NEXT, KC_MPRV, KC_MNXT, KC_VOLU, KC_PGUP, KC_UNDS,                            KC_EQL,  KC_HOME, RM_HUEU, RM_SATU, RM_VALU, KC_BSLS,
+     KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_MSTP, KC_VOLD,                            KC_PAST, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, EE_CLR,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_MUTE, KC_MSTP, KC_MPLY, KC_VOLD, KC_PGDN, KC_MINS, KC_LPRN,          _______, KC_PLUS, KC_END,  RM_HUED, RM_SATD, RM_VALD, EE_CLR,
+     RM_HUED, RM_SATD, RM_VALD, DF(_QWERTY), DF(_COLEMAK), _______, _______,  _______, _______, KC_P1,   KC_P2,   KC_P3,   KC_PDOT, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, _______, _______
+                                    _______, _______, _______,                   _______, _______, KC_P0
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -128,23 +123,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  // Symbol layer -- hold right-inner thumb (Backspace). Frequency-optimized for
-  // TypeScript + Lua/LazyVim. Bracket pairs mirror across the hands (open on the
-  // left, close on the right) on the home row: ( ) on the index fingers, { } on
-  // the middle, < > on the ring. = and | sit on the index reaches; the [ ] pair
-  // stacks on the top row directly above ( ). Arithmetic ( + - * ) mirrors on the
-  // top row; the bottom index fingers hold the two logic keys (! left, & right).
-  // Colon, semicolon, slash, and question mark are left to the base layer, where
-  // each is already a tap (or shift) away.
+  // Symbol layer -- hold right-inner thumb (Backspace). The left upper row mirrors
+  // the shifted number row: ! @ # $ % on Q W E R T. Everything else is placed by
+  // usage. Bracket pairs (highest frequency) sit open-next-to-close on the home
+  // row, balanced across hands: [ ] ( ) on the left, { } < > on the right. The
+  // right upper row carries math/assignment plus pipe, by usage: = + - * |. The
+  // bottom rows hold the low-frequency symbols: ` \ _ on the left, & ^ ~ on the
+  // right. Sentence punctuation keeps its familiar columns: semicolon/quote on the
+  // right home-row pinky, and comma/dot/slash on the right number row. Shift each
+  // for : " < > ?.
   [_SYM] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     _______, _______, _______, _______, _______, _______,                            _______, _______, KC_COMM, KC_DOT,  KC_SLSH, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_HASH, KC_ASTR, KC_PLUS, KC_LBRC, _______,                            _______, KC_RBRC, KC_MINS, _______, KC_AT,   _______,
+     _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            _______, KC_EQL,  KC_PLUS, KC_MINS, KC_ASTR, KC_PIPE,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, KC_LABK, KC_LCBR, KC_LPRN, KC_EQL,                             KC_PIPE, KC_RPRN, KC_RCBR, KC_RABK, _______, _______,
+     _______, _______, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN,                            KC_LCBR, KC_RCBR, KC_LABK, KC_RABK, KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_PERC, KC_BSLS, KC_UNDS, KC_EXLM, KC_DLR,  _______,          _______, KC_GRV,  KC_AMPR, _______, KC_CIRC, KC_TILD, _______,
+     _______, KC_GRV,  KC_BSLS, KC_UNDS, _______, _______, _______,          _______, KC_AMPR, KC_CIRC, KC_TILD, _______, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -179,28 +175,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, C(A(KC_ENT)),  C(A(KC_S)),    C(A(S(KC_SPC))), _______,     C(A(KC_G)),           C(A(KC_LEFT)),    C(A(KC_DOWN)),    C(A(KC_UP)),    C(A(KC_RGHT)),    C(A(KC_MINS)), C(A(KC_EQL)),
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, C(A(KC_Z)),    C(A(KC_Q)),    C(A(KC_O)),    C(A(KC_P)),    C(A(KC_SLSH)), _______,  _______, _______, _______, _______, _______, _______, _______,
-  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, _______, _______
-                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ),
-
-  // Vim passthrough layer -- hold left-inner thumb (Enter). Emits plain QWERTY
-  // letters with NO home-row mods, so modal-editor motions (hjkl, dd, ciw, 5j,
-  // :wq) fire instantly with zero tap-hold latency or misfires. The QWERTY
-  // letters are hard-coded, so this layer works even when the base is Colemak --
-  // vim stays on standard QWERTY muscle memory. Everything non-alpha (number row,
-  // thumbs, Tab, Esc, Shift, comma/dot/slash/quote) is transparent and falls
-  // through to the base layer, where those keys are identical across QWERTY and
-  // Colemak. Board glows white while VIM is held.
-  [_VIM] = LAYOUT(
-  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    _______,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, _______,
-  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______,            _______, KC_N,    KC_M,    _______, _______, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -262,10 +236,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         return state;
     }
     switch (get_highest_layer(state)) {
-        case _LOWER:
-            set_solid_hs(HSV_ORANGE);
-            break;
-        case _RAISE:
+        case _FN:
             set_solid_hs(HSV_TEAL);
             break;
         case _NAV:
@@ -276,9 +247,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             break;
         case _WM:
             set_solid_hs(HSV_PURPLE);
-            break;
-        case _VIM:
-            set_solid_hs(HSV_WHITE);
             break;
         default:  // back on a base layer
             apply_base_layer_rgb();

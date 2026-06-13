@@ -12,8 +12,8 @@ layers:
   - '8'
   - '9'
   - '0'
-  - BSPC
-  - TAB
+  - ''
+  - ''
   - Q
   - W
   - E
@@ -43,8 +43,8 @@ layers:
   - C
   - V
   - B
-  - {t: HOME, h: LOWER}
-  - {t: END, h: RAISE}
+  - {t: HOME, h: FN}
+  - {t: END, h: FN}
   - N
   - M
   - ','
@@ -52,8 +52,8 @@ layers:
   - /
   - RSFT
   - LGUI
-  - {t: SPC, h: WM}
-  - {t: ENT, h: VIM}
+  - {t: TAB, h: WM}
+  - ENT
   - LT( SYM,BSPC)
   - {t: SPC, h: NAV}
   - RALT
@@ -69,8 +69,8 @@ layers:
   - '8'
   - '9'
   - '0'
-  - BSPC
-  - TAB
+  - ''
+  - ''
   - Q
   - W
   - F
@@ -100,8 +100,8 @@ layers:
   - C
   - D
   - V
-  - {t: HOME, h: LOWER}
-  - {t: END, h: RAISE}
+  - {t: HOME, h: FN}
+  - {t: END, h: FN}
   - K
   - H
   - ','
@@ -109,69 +109,12 @@ layers:
   - /
   - RSFT
   - LGUI
-  - {t: SPC, h: WM}
-  - {t: ENT, h: VIM}
+  - {t: TAB, h: WM}
+  - ENT
   - LT( SYM,BSPC)
   - {t: SPC, h: NAV}
   - RALT
-  Lower:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - PGUP
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - UP
-  - {t: ▽, type: trans}
-  - QK BOOT
-  - {t: ▽, type: trans}
-  - PSLS
-  - P7
-  - P8
-  - P9
-  - {t: ▽, type: trans}
-  - PGDN
-  - DEL
-  - LEFT
-  - DOWN
-  - RGHT
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - PAST
-  - P4
-  - P5
-  - P6
-  - PPLS
-  - {t: ▽, type: trans}
-  - RM NEXT
-  - EE CLR
-  - DF( QWERTY)
-  - DF( COLEMAK)
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - PMNS
-  - P1
-  - P2
-  - P3
-  - PDOT
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - DEL
-  - DEL
-  - {t: ▽, type: trans}
-  - P0
-  Raise:
+  FN:
   - F12
   - F1
   - F2
@@ -185,49 +128,49 @@ layers:
   - F10
   - F11
   - RM TOGG
-  - '!'
-  - '@'
-  - '#'
-  - $
-  - '%'
-  - ^
-  - '&'
-  - '*'
-  - (
-  - )
-  - QK BOOT
-  - RM NEXT
-  - MPRV
-  - MNXT
-  - VOLU
-  - PGUP
-  - _
-  - '='
-  - HOME
   - RM HUEU
   - RM SATU
   - RM VALU
-  - \
+  - RM NEXT
+  - VOLU
+  - PSLS
+  - P7
+  - P8
+  - P9
+  - PMNS
+  - QK BOOT
+  - MPRV
+  - MPLY
+  - MNXT
   - MUTE
   - MSTP
-  - MPLY
   - VOLD
-  - PGDN
-  - '-'
-  - (
-  - {t: ▽, type: trans}
-  - +
-  - END
+  - PAST
+  - P4
+  - P5
+  - P6
+  - PPLS
+  - EE CLR
   - RM HUED
   - RM SATD
   - RM VALD
-  - EE CLR
+  - DF( QWERTY)
+  - DF( COLEMAK)
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - P1
+  - P2
+  - P3
+  - PDOT
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - P0
   Nav (editing):
   - QK LLCK
   - {t: ▽, type: trans}
@@ -294,47 +237,47 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - ','
+  - .
+  - /
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '#'
-  - '*'
-  - +
-  - '['
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - ']'
-  - '-'
-  - {t: ▽, type: trans}
-  - '@'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - <
-  - '{'
-  - (
-  - '='
-  - '|'
-  - )
-  - '}'
-  - '>'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '%'
-  - \
-  - _
   - '!'
+  - '@'
+  - '#'
   - $
+  - '%'
   - {t: ▽, type: trans}
+  - '='
+  - +
+  - '-'
+  - '*'
+  - '|'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '['
+  - ']'
+  - (
+  - )
+  - '{'
+  - '}'
+  - <
+  - '>'
+  - ;
+  - "'"
   - {t: ▽, type: trans}
   - '`'
-  - '&'
+  - \
+  - _
   - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&'
   - ^
   - '~'
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -389,63 +332,6 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  VIM (QWERTY):
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Q
-  - W
-  - E
-  - R
-  - T
-  - Y
-  - U
-  - I
-  - O
-  - P
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - A
-  - S
-  - D
-  - F
-  - G
-  - H
-  - J
-  - K
-  - L
-  - ;
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Z
-  - X
-  - C
-  - V
-  - B
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - N
-  - M
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
