@@ -11,18 +11,17 @@ Each inner thumb is a **tap = key / hold = layer** dual-role key.
 
 | Thumb (L→R) | Tap | Hold |
 |---|---|---|
-| Left outer | Cmd (GUI) | **WM** layer |
-| Left middle | Space | **LOWER** layer |
-| Left inner | Enter | **NAV** layer |
+| Left outer | Cmd (GUI) | — |
+| Left middle | Space | **WM** layer |
+| Left inner | Enter | **VIM** layer |
 | Right inner | Backspace | **SYM** layer |
-| Right middle | Space | **RAISE** layer |
+| Right middle | Space | **NAV** layer |
 | Right outer | Right Alt | — |
 
-> Holding the left-outer thumb now activates the **WM** (window-manager) layer, so
-> that thumb no longer gives you *hold*-Cmd. Use home-row Cmd (D / Colemak S) for
-> Cmd+click and friends.
-
-Hold LOWER **and** RAISE together → **ADJUST** (tri-layer).
+> **LOWER** and **RAISE** aren't on the thumb cluster — they live on the two inner
+> bottom-row keys: `Home` (tap) / **LOWER** (hold) on the left, `End` (tap) /
+> **RAISE** (hold) on the right. Hold LOWER **and** RAISE together → **ADJUST**
+> (tri-layer).
 
 ---
 
@@ -86,6 +85,27 @@ Board glows **green** while NAV is active.
 - Hold NAV, tap the **top-left key (Esc position)** → NAV locks on, no thumb needed.
 - Tap it again to release. Stays **green** the whole time so you know you're in the
   (destructive) editing mode.
+
+---
+
+## VIM layer — plain QWERTY passthrough (hold left-inner / Enter)
+
+Board glows **white**. Hold the left-inner thumb and the alphas turn into **plain
+QWERTY letters with no home-row mods** — so modal-editor motions fire instantly,
+with none of the ~200 ms tap-hold delay or mod misfires that home-row mods add.
+
+```
+hold Enter → ciw  dd  5j  yyp  :wq   (no mod-tap latency, no accidental Ctrl/Cmd)
+```
+
+- The QWERTY letters are **hard-coded**, so this works even when your base layer is
+  **Colemak** — vim stays on standard QWERTY muscle memory regardless of layout.
+- Only the alpha keys are remapped. The number row, `Tab`, `Esc`, `Shift`,
+  `, . / '`, and the thumb keys are **transparent** — they fall through to the base
+  layer (where they're identical on QWERTY and Colemak), so Space / Backspace / Esc
+  all behave normally while you're holding the layer.
+- It's a momentary hold (no layer-lock); release Enter to drop back to your base
+  layer. `Esc` is a plain tap on the top-left key throughout.
 
 ---
 
@@ -200,6 +220,7 @@ Brightness **persists** across layer changes and reboots.
 | NAV (held or locked) | green |
 | SYM | gold |
 | WM (held or locked) | purple |
+| VIM (held) | white |
 
 Colors are `*_noeeprom`, so they never overwrite your saved RGB settings.
 

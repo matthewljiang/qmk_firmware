@@ -10,7 +10,8 @@ enum custom_layers {
      _RAISE,
      _NAV,
      _SYM,
-     _WM
+     _WM,
+     _VIM
 };
 
 // Home row mods (CAGS: Ctrl, Alt, GUI/Cmd, Shift) -- tuned for macOS
@@ -48,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    LT(_LOWER,KC_HOME),  LT(_RAISE,KC_END), KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LGUI, LT(_WM,KC_SPC), KC_ENT, LT(_SYM,KC_BSPC), LT(_NAV,KC_SPC), KC_RALT
+                                    KC_LGUI, LT(_WM,KC_SPC), LT(_VIM,KC_ENT), LT(_SYM,KC_BSPC), LT(_NAV,KC_SPC), KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ), // _QWERTY thumbs: LT(_WM, KC_LGUI) replaces plain LGUI on the left outer
 
@@ -62,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    LT(_LOWER,KC_HOME),  LT(_RAISE,KC_END), KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LGUI, LT(_WM,KC_SPC), KC_ENT, LT(_SYM,KC_BSPC), LT(_NAV,KC_SPC), KC_RALT
+                                    KC_LGUI, LT(_WM,KC_SPC), LT(_VIM,KC_ENT), LT(_SYM,KC_BSPC), LT(_NAV,KC_SPC), KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -181,6 +182,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
+  // Vim passthrough layer -- hold left-inner thumb (Enter). Emits plain QWERTY
+  // letters with NO home-row mods, so modal-editor motions (hjkl, dd, ciw, 5j,
+  // :wq) fire instantly with zero tap-hold latency or misfires. The QWERTY
+  // letters are hard-coded, so this layer works even when the base is Colemak --
+  // vim stays on standard QWERTY muscle memory. Everything non-alpha (number row,
+  // thumbs, Tab, Esc, Shift, comma/dot/slash/quote) is transparent and falls
+  // through to the base layer, where those keys are identical across QWERTY and
+  // Colemak. Board glows white while VIM is held.
+  [_VIM] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     _______, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    _______,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, _______,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______,            _______, KC_N,    KC_M,    _______, _______, _______, _______,
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    _______, _______, _______,                   _______, _______, _______
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
 
@@ -253,6 +276,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             break;
         case _WM:
             set_solid_hs(HSV_PURPLE);
+            break;
+        case _VIM:
+            set_solid_hs(HSV_WHITE);
             break;
         default:  // back on a base layer
             apply_base_layer_rgb();
