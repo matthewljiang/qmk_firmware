@@ -1,226 +1,150 @@
 # Matthew's Iris CE keymap — quick reference
 
-A scannable cheat sheet for what's available. Two base layouts (Colemak + QWERTY),
-CAGS home-row mods, and five hold-to-activate layers on the thumbs.
+Ported from my ZSA Moonlander Colemak-DHm layout (Oryx `aOMg7/m5XPwj`). The
+Moonlander's gaming QWERTY layer is dropped; this board keeps its own QWERTY
+base. There is no window-manager layer (the Moonlander didn't have one).
+
+Two base layouts (Colemak + QWERTY), CAGS home-row mods, four hold-to-reach
+layers, and four combos.
 
 ---
 
-## Thumb keys (how you reach everything)
+## Reaching the layers
 
-Each inner thumb is a **tap = key / hold = layer** dual-role key.
-
-| Thumb (L→R) | Tap | Hold |
+| Hold | Layer | What's on it |
 |---|---|---|
-| Left outer | Cmd (GUI) | — |
-| Left middle | Space | **WM** layer |
-| Left inner | Enter | **VIM** layer |
-| Right inner | Backspace | **SYM** layer |
-| Right middle | Space | **NAV** layer |
-| Right outer | Right Alt | — |
+| **Left Space** (left-mid thumb) | **NAV** | arrows + Home/End/PgUp/PgDn (right hand) |
+| **D** (left index, lower row) | **NUM** | numpad (right hand) |
+| **X** while in NUM | **SYM2** | `_ + \| - = \` (right hand) |
+| **H** (right index, lower row) | **SYM** | bracket pairs (left hand) |
+| **left-outer thumb** (`TT`, tap) | **MEDIA** | media transport + RGB |
 
-> **LOWER** and **RAISE** aren't on the thumb cluster — they live on the two inner
-> bottom-row keys: `Home` (tap) / **LOWER** (hold) on the left, `End` (tap) /
-> **RAISE** (hold) on the right. Hold LOWER **and** RAISE together → **ADJUST**
-> (tri-layer).
+`TT(MEDIA)` is a toggle: tap to enter, tap again to leave (or hold for momentary).
+
+> On the QWERTY base the NUM/SYM holds sit on the same physical keys (left-index
+> lower / right-index lower), so the muscle memory carries across both layouts.
+
+---
+
+## Thumb keys
+
+| | outer | middle | inner |
+|---|---|---|---|
+| **Left**  | `TT` MEDIA | Space / **NAV** (hold) | Enter |
+| **Right** | Backspace | Space | Right Alt |
+
+---
+
+## Combos
+
+Matched by keycode (so they fire on the Colemak base, where these are all plain
+keys). On the QWERTY base only `W+F`=Tab is affected — `F` is a home-row mod-tap
+there — the other three work on both.
+
+| Combo | Output |
+|---|---|
+| `W` + `F` | Tab |
+| `U` + `Y` | Enter |
+| `X` + `C` | Esc |
+| `,` + `.` | Delete |
 
 ---
 
 ## Home-row mods (CAGS)
 
-Hold a home-row key for a modifier; tap it for the letter. Same on both layouts.
+Hold a home-row key for a modifier; tap for the letter. Same on both layouts.
 
 | | pinky | ring | middle | index |
 |---|---|---|---|---|
 | **Left**  (Colemak A R S T) | **Ctrl** | **Alt** | **Cmd** | **Shift** |
 | **Right** (Colemak N E I O) | **Shift** | **Cmd** | **Alt** | **Ctrl** |
 
-Tuned for macOS. `TAPPING_TERM` 200 ms, permissive hold on.
+Tuned for macOS. `TAPPING_TERM` 200 ms, permissive hold on, `QUICK_TAP_TERM` 120 ms.
+
+---
+
+## SYM layer — brackets (hold right-index `H`)
+
+Bracket pairs on the **left** hand, open next to close:
+
+```
+` [ ] < >      (upper row: Q W F P B positions)
+~ { } ( )      (home row:  A R S T G positions)
+```
+
+Tap the **top-left key (Esc position)** to lock SYM hands-free; tap again to release.
+
+---
+
+## SYM2 layer — extra symbols (hold `D`, then `X`)
+
+Nested under NUM, on the **right** hand:
+
+```
+_ + |          (upper row)
+- = \          (home row)
+```
+
+---
+
+## NAV layer — navigation (hold left Space)
+
+Right hand:
+
+```
+Home PgDn PgUp End     (upper row)
+ ←    ↓    ↑    →       (home row)
+```
+
+The left home row stays transparent, so the CAGS mods pass through — hold
+Shift/Cmd/Opt + an arrow to select. Tap the **top-left key (Esc)** to lock NAV;
+tap again to release.
+
+---
+
+## NUM layer — numpad (hold `D`)
+
+Right hand, calculator layout:
+
+```
+7 8 9
+4 5 6
+1 2 3
+ 0        (right inner thumb)
+```
+
+Left hand: **Left Shift** (for shifted digits) and **SYM2** access on `X`.
+
+---
+
+## MEDIA layer — media + RGB (`TT`, left-outer thumb)
+
+- **Left:** volume down/up/mute, media prev/stop/play/next, system sleep/wake.
+- **Left bottom row:** `DF(_QWERTY)` / `DF(_COLEMAK)` base switches.
+- **Right:** RGB hue/sat/val ±, animation next/prev, speed ±, toggle.
+- **Corners:** `QK_BOOT` (top-right) and `EE_CLR` (right pinky) for reflashing.
 
 ---
 
 ## Switching base layout
 
-On the **LOWER** layer, bottom-row left:
-
-- `DF(_QWERTY)` and `DF(_COLEMAK)` — set the default base layer (persists).
-
-Board color tells you which is active: **red = QWERTY**, **blue = Colemak**.
+On **MEDIA**, bottom-row left: `DF(_QWERTY)` / `DF(_COLEMAK)` (persists at
+runtime, but a reset always boots **Colemak**). Board color shows which is
+active: **red = QWERTY**, **blue = Colemak**.
 
 ---
 
-## NAV layer — navigation + text editing (hold left-inner / Enter)
-
-Board glows **green** while NAV is active.
-
-### Movement (right hand)
-```
-            ⌥- ⌥=                     window shrink / grow (top row, above ↓↑)
-        ⌥←  PgDn PgUp ⌥→              word-jump + page (top row)
-         ←   ↓    ↑    →   Home End   arrows + line ends (home row)
-```
-
-`⌥-` / `⌥=` resize the focused window (Alt+minus / Alt+equals).
-
-### Editing (left hand)
-| Key (Colemak) | Action |
-|---|---|
-| `Q` | delete to line start (Cmd+⌫) |
-| `W` | delete previous word (⌥⌫) |
-| `F`/`E` pos | delete next word (⌥⌦) |
-| `P`/`R` pos | delete to line end (Ctrl+K) |
-| `Z` | **undo** (Cmd+Z) |
-| `X` | **cut** (Cmd+X) |
-| `C` | **copy** (Cmd+C) |
-| `V` | **paste** (Cmd+V) |
-| `B` | **redo** (Cmd+Shift+Z) |
-
-### Selection
-- Left home row keeps the **CAGS mods**, so hold Shift/Cmd/Opt + a right-hand
-  movement key to select (e.g. Shift+→ = select char, Opt+Shift+→ = select word).
-- **One-shot Shift** on the right `P` key: tap it, then any movement key extends a
-  selection — "shift for a whole word." Tap twice to lock Shift on.
-- `Cmd+A` select-all on the right `N`/`J` position (bottom row).
-
-### Layer lock (stay in NAV hands-free)
-- Hold NAV, tap the **top-left key (Esc position)** → NAV locks on, no thumb needed.
-- Tap it again to release. Stays **green** the whole time so you know you're in the
-  (destructive) editing mode.
-
----
-
-## VIM layer — plain QWERTY passthrough (hold left-inner / Enter)
-
-Board glows **white**. Hold the left-inner thumb and the alphas turn into **plain
-QWERTY letters with no home-row mods** — so modal-editor motions fire instantly,
-with none of the ~200 ms tap-hold delay or mod misfires that home-row mods add.
-
-```
-hold Enter → ciw  dd  5j  yyp  :wq   (no mod-tap latency, no accidental Ctrl/Cmd)
-```
-
-- The QWERTY letters are **hard-coded**, so this works even when your base layer is
-  **Colemak** — vim stays on standard QWERTY muscle memory regardless of layout.
-- Only the alpha keys are remapped. The number row, `Tab`, `Esc`, `Shift`,
-  `, . / '`, and the thumb keys are **transparent** — they fall through to the base
-  layer (where they're identical on QWERTY and Colemak), so Space / Backspace / Esc
-  all behave normally while you're holding the layer.
-- It's a momentary hold (no layer-lock); release Enter to drop back to your base
-  layer. `Esc` is a plain tap on the top-left key throughout.
-
----
-
-## WM layer — AeroSpace window manager (hold left-outer / Cmd)
-
-Board glows **purple**. The layer holds **Ctrl+Alt** (and Shift where noted) for
-you, so each AeroSpace op is a single tap instead of a four-key chord. AeroSpace's
-config is unchanged — the keyboard just sends the chords it already listens for.
-
-### Right hand — focus & move (arrows mirror NAV)
-```
-move    (⌃⌥⇧+arrow)   Y  U  I  O          ← ↓ ↑ →   move window
-focus   (⌃⌥+arrow)    H  J  K  L          ← ↓ ↑ →   focus window
-resize  (⌃⌥ -/=)              ;  '        shrink / grow
-extras  (top row)                P  Del   workspace back-and-forth · fullscreen
-```
-
-### Left hand — workspaces & actions
-| Key (Colemak pos) | Action |
-|---|---|
-| `1`–`5` (number row) | switch to workspace 1–5 (⌃⌥n) |
-| `Q W E R T` (row below) | move window to workspace 1–5 (⌃⌥⇧n) |
-| `Z` | workspace **Z**oom · `S` workspace **S**lack · `G` workspace **G**mail |
-| `A` | new terminal (⌃⌥↵) |
-| `D` | toggle floating/tiling (⌃⌥⇧space) |
-| `X` | close window · `C` rotate · `V` cycle side padding · `B` tiles ⇄ accordion toggle |
-
-### Layer lock (hands-free)
-- Hold WM, tap the **top-left key (Esc position)** → WM locks on, no thumb needed.
-- Tap it again to release. Stays **purple** the whole time.
-
-> Not yet mapped (still reachable via the raw ⌃⌥ chords): accordion-only toggle,
-> service mode, and move-workspace-to-monitor. Easy to add to the layer later.
-
----
-
-## SYM layer — programming symbols (hold right-inner / Backspace)
-
-Board glows **gold**. Frequency-tuned for TypeScript + Lua/LazyVim. Bracket pairs
-**mirror across the hands** — open on the left, close on the mirrored finger of the
-right — on the home row.
-
-```
- #  *  +  [  ·        ·  ]  -  ·  @
- ·  <  {  (  =        |  )  }  >  ·
- %  \  _  !  $        `  &  ·  ^  ~
-   pnk rng mid idx       idx mid rng pnk
-```
-
-| Position | Symbols |
-|---|---|
-| Home, index | `(` `)` — most-typed pair, alternating-hand roll |
-| Home, middle | `{` `}` |
-| Home, ring | `<` `>` — generics |
-| Home, index-reach | `=` (left) · `\|` (right, TS unions) |
-| Top, index | `[` `]` — stacked above `( )` |
-| Top row | `+ - *` arithmetic · `#` `@` |
-| Bottom, index | `!` (left) · `&` (right) — the two logic keys |
-| Bottom, index-reach | `$` (left) · `` ` `` (right) — template-literal chars |
-| Bottom row | `% \ _ ^ ~` |
-
-> `:` `;` `/` `?` are **not** on SYM — each is a plain tap (or shift) on the base
-> layer, so duplicating them here was wasted real estate.
-
----
-
-## LOWER layer (hold left-middle / Space)
-
-Board glows **orange**. A clean calculator-style number pad on the right, arrows on
-the left. All the symbol clutter that used to live here now has **one home on SYM** —
-LOWER keeps only the keypad operators (`/ * - + .`) that belong with a numpad.
-
-- Right: numpad `7 8 9 / 4 5 6 / 1 2 3`, `0` on the thumb, with `/ * - +` down the
-  inner column and `.` by the `3`. PgUp/PgDn on the outer column.
-- Left: arrow cluster (`← ↓ → / ↑`), `Del`, `QK_BOOT`.
-- Bottom-left: `DF(_QWERTY)` / `DF(_COLEMAK)`, `RM_NEXT`, `EE_CLR`.
-
-> The keypad `+ - * /` here output the same characters as SYM's; they're kept only
-> because a numpad without operators is painful. Every other symbol lives on SYM.
-
----
-
-## RAISE layer — F-keys, media, RGB (hold right-middle / Space)
-
-Board glows **teal**.
-
-- **Top row:** F1–F12
-- **Media (left):** prev/next track, play/stop, volume up/down, mute
-- **RGB controls (right):**
-
-| Control | Key (Colemak) | Code |
-|---|---|---|
-| Brightness **up** | `O` (home row) | `RM_VALU` |
-| Brightness **down** | `/` (bottom row) | `RM_VALD` |
-| Hue +/− | `E` / `,` | `RM_HUEU` / `RM_HUED` |
-| Saturation +/− | `I` / `.` | `RM_SATU` / `RM_SATD` |
-| Toggle RGB on/off | `Q` | `RM_TOGG` |
-| Next animation | `Tab` pos | `RM_NEXT` |
-
-Brightness **persists** across layer changes and reboots.
-
----
-
-## Per-layer colors at a glance
+## Per-layer colors
 
 | Layer | Color |
 |---|---|
 | QWERTY (base) | red |
 | Colemak (base) | blue |
-| LOWER | orange |
-| RAISE | teal |
 | NAV (held or locked) | green |
-| SYM | gold |
-| WM (held or locked) | purple |
-| VIM (held) | white |
+| SYM (held or locked) | gold |
+| NUM | orange |
+| SYM2 | purple |
+| MEDIA | teal |
 
 Colors are `*_noeeprom`, so they never overwrite your saved RGB settings.
 
@@ -233,4 +157,4 @@ qmk compile -kb keebio/iris_ce/rev1 -km matthew
 qmk flash   -kb keebio/iris_ce/rev1 -km matthew   # put a half in bootloader first
 ```
 
-Split board: flash each half separately (`QK_BOOT` is on RAISE, top-right).
+Split board: flash each half separately (`QK_BOOT` is on MEDIA, top-right).
