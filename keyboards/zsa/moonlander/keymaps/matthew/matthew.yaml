@@ -1,0 +1,440 @@
+layout: {qmk_keyboard: zsa/moonlander, layout_name: LAYOUT}
+layers:
+  QWERTY:
+  - QK GESC
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - ''
+  - ''
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
+  - Q
+  - W
+  - E
+  - R
+  - T
+  - ''
+  - ''
+  - Y
+  - U
+  - I
+  - O
+  - P
+  - DEL
+  - ESC
+  - {t: A, h: LCTL}
+  - {t: S, h: LALT}
+  - {t: D, h: LGUI}
+  - {t: F, h: LSFT}
+  - G
+  - LT( FN,HOME)
+  - LT( FN,END)
+  - H
+  - {t: J, h: RSFT}
+  - {t: K, h: RGUI}
+  - {t: L, h: LALT}
+  - {t: ;, h: RCTL}
+  - ''''
+  - LSFT
+  - Z
+  - X
+  - C
+  - V
+  - B
+  - N
+  - M
+  - ','
+  - .
+  - /
+  - RSFT
+  - ''
+  - ''
+  - ''
+  - ''
+  - SPC
+  - LT( WM,TAB)
+  - LT( NAV,SPC)
+  - SPC
+  - ''
+  - ''
+  - ''
+  - ''
+  - ENT
+  - LGUI
+  - ''
+  - RALT
+  - LT( SYM,BSPC)
+  - ''
+  COLEMAK:
+  - QK GESC
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - ''
+  - ''
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
+  - Q
+  - W
+  - F
+  - P
+  - B
+  - ''
+  - ''
+  - J
+  - L
+  - U
+  - Y
+  - ;
+  - DEL
+  - ESC
+  - {t: A, h: LCTL}
+  - {t: R, h: LALT}
+  - {t: S, h: LGUI}
+  - {t: T, h: LSFT}
+  - G
+  - LT( FN,HOME)
+  - LT( FN,END)
+  - M
+  - {t: N, h: RSFT}
+  - {t: E, h: RGUI}
+  - {t: I, h: LALT}
+  - {t: O, h: RCTL}
+  - ''''
+  - LSFT
+  - Z
+  - X
+  - C
+  - D
+  - V
+  - K
+  - H
+  - ','
+  - .
+  - /
+  - RSFT
+  - ''
+  - ''
+  - ''
+  - ''
+  - SPC
+  - LT( WM,TAB)
+  - LT( NAV,SPC)
+  - SPC
+  - ''
+  - ''
+  - ''
+  - ''
+  - ENT
+  - LGUI
+  - ''
+  - RALT
+  - LT( SYM,BSPC)
+  - ''
+  FN:
+  - F12
+  - F1
+  - F2
+  - F3
+  - F4
+  - F5
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - F6
+  - F7
+  - F8
+  - F9
+  - F10
+  - F11
+  - RM TOGG
+  - RM HUEU
+  - RM SATU
+  - RM VALU
+  - RM NEXT
+  - VOLU
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - PSLS
+  - P7
+  - P8
+  - P9
+  - PMNS
+  - QK BOOT
+  - MPRV
+  - MPLY
+  - MNXT
+  - MUTE
+  - MSTP
+  - VOLD
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - PAST
+  - P4
+  - P5
+  - P6
+  - PPLS
+  - EE CLR
+  - RM HUED
+  - RM SATD
+  - RM VALD
+  - DF( QWERTY)
+  - DF( COLEMAK)
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - P1
+  - P2
+  - P3
+  - PDOT
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - P0
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  NAV:
+  - QK LLCK
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - Alt+-
+  - Alt+=
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - Gui+BSPC
+  - Alt+BSPC
+  - Alt+DEL
+  - Ctl+K
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - Alt+LEFT
+  - PGDN
+  - PGUP
+  - Alt+RGHT
+  - {t: LSFT, h: sticky}
+  - DEL
+  - {t: ▽, type: trans}
+  - LCTL
+  - LALT
+  - LGUI
+  - LSFT
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - LEFT
+  - DOWN
+  - UP
+  - RGHT
+  - HOME
+  - END
+  - {t: ▽, type: trans}
+  - Gui+Z
+  - Gui+X
+  - Gui+C
+  - Gui+V
+  - Sft+Gui+Z
+  - Gui+A
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  SYM:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ','
+  - .
+  - /
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '!'
+  - '@'
+  - '#'
+  - $
+  - '%'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '='
+  - +
+  - '-'
+  - '*'
+  - '|'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '['
+  - ']'
+  - (
+  - )
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '{'
+  - '}'
+  - <
+  - '>'
+  - ;
+  - ''''
+  - {t: ▽, type: trans}
+  - '`'
+  - \
+  - _
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&'
+  - ^
+  - '~'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  WM:
+  - QK LLCK
+  - Ctl+Alt+1
+  - Ctl+Alt+2
+  - Ctl+Alt+3
+  - Ctl+Alt+4
+  - Ctl+Alt+5
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - Meh+1
+  - Meh+2
+  - Meh+3
+  - Meh+4
+  - Meh+5
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - Meh+LEFT
+  - Meh+DOWN
+  - Meh+UP
+  - Meh+RGHT
+  - Ctl+Alt+TAB
+  - Ctl+Alt+F
+  - {t: ▽, type: trans}
+  - Ctl+Alt+ENT
+  - Ctl+Alt+S
+  - Meh+SPC
+  - {t: ▽, type: trans}
+  - Ctl+Alt+G
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - Ctl+Alt+LEFT
+  - Ctl+Alt+DOWN
+  - Ctl+Alt+UP
+  - Ctl+Alt+RGHT
+  - Ctl+Alt+-
+  - Ctl+Alt+=
+  - {t: ▽, type: trans}
+  - Ctl+Alt+Z
+  - Ctl+Alt+Q
+  - Ctl+Alt+O
+  - Ctl+Alt+P
+  - Ctl+Alt+/
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
