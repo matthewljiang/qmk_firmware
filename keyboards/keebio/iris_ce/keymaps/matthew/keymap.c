@@ -3,22 +3,45 @@
 
 #include QMK_KEYBOARD_H
 
-// Ported from the ZSA Moonlander Colemak-DHm layout (Oryx hash aOMg7/m5XPwj).
-// The Moonlander's gaming QWERTY layer is intentionally dropped; this board
-// keeps its own QWERTY base instead. The Moonlander has no window-manager
-// layer, so that is dropped too.
+// Hold-free layout. The original port of my ZSA Moonlander Colemak-DHm layout
+// leaned on sustained holds everywhere -- home-row mods plus layer-tap holds on
+// the thumbs -- and that constant isometric holding caused hand tension. This
+// version removes holding from the base layer entirely:
 //
-// Layer access -- all on the thumb cluster (tap = the legend, hold = the layer):
-//   hold left Space  -> NUM    (numpad on the right hand)
-//   hold Enter       -> NAV    (arrows / home-end / page on the right hand)
-//   hold right Space -> SYM    (bracket pairs on the left hand)
-//   hold Backspace   -> SYM2   (_ + | - = \  on the right hand)
-//     hold X in NUM  -> SYM2   (also reachable nested, like Moonlander MO(5))
-//   tap left-outer   -> MEDIA  (TT toggle: media transport + RGB)
+//   * Modifiers are ONE-SHOT (OSM) fired by COMBOS: squeeze a home-row key with
+//     the bottom-row key below it (same finger) and the next key is modified.
+//     They chain natively (fire Shift, fire Cmd, tap T -> Cmd+Shift+T) with no
+//     holding. You CAN hold a combo'd mod if you want (e.g. Shift while tapping
+//     arrows to extend a selection), but you never have to.
+//   * SYM (symbols) is a ONE-SHOT LAYER (OSL): tap, type one symbol, it exits.
+//   * NUM and NAV are TOGGLES (TG): tap to enter, tap again to leave -- good for
+//     sustained numpad entry or arrow navigation without holding anything.
+//   * Caps Word (CW_TOGG) replaces holding Shift for CONSTANT_NAMES / PascalCase.
+//   * ONESHOT_TAP_TOGGLE (config.h) means double-tapping ANY one-shot locks it
+//     on: double-tap SYM to lock the symbol layer.
 //
-// Combos (defined by keycode, so they fire on the Colemak base; on QWERTY the
-// W+F=Tab and L+U=Backspace combos won't fire because F and L are home-row
-// mod-taps there):
+// Thumb-light: the thumb cluster is nearly empty. Only THREE thumb keys are
+// live; the rest are dead (KC_NO) so there is nothing awkward to reach for:
+//   left  middle thumb -> Space        left  inner thumb -> OSL(SYM)  [trigger]
+//                                       right inner thumb -> TG(AERO) [trigger]
+//   (every other thumb key is unused)
+//
+// Modifiers live on two-finger home-row COMBOS, keeping the same finger -> mod
+// identity as the old home-row mods (pinky Ctrl, ring Alt, middle Cmd, index
+// Shift): each mod fires from its finger's home key plus the neighbour rolling
+// inward. Shift is the outer pinky+index pinch (the index has no free inward
+// neighbour). On BOTH hands so you can mod with the hand the letter isn't on:
+//   A+R Ctrl   R+S Alt   S+T Cmd   A+T Shift(pinch)   (left, Colemak)
+//   O+I Ctrl   I+E Alt   E+N Cmd   O+N Shift(pinch)   (right, Colemak)
+//
+// Backspace / Enter moved off the thumbs onto the two inner index keys (the
+// center keys between the halves). Caps Word sits on the left pinky bottom.
+//
+// Layer access:
+//   left  pinky row1 -> TG(NAV)        right pinky row1  -> TG(NUM)
+//   top-right corner -> TT(MEDIA)      right inner thumb -> TG(AERO)
+//
+// Other combos (matched by Colemak keycode):
 //   W+F = Tab   U+Y = Enter   Q+W = Esc   , + . = Delete   L+U = Backspace
 enum custom_layers {
      _QWERTY,
@@ -26,75 +49,63 @@ enum custom_layers {
      _SYM,
      _NAV,
      _NUM,
-     _SYM2,
-     _MEDIA
+     _MEDIA,
+     _AERO
 };
 
-// Home row mods (CAGS: Ctrl, Alt, GUI/Cmd, Shift) -- tuned for macOS
-// QWERTY home row: A S D F | J K L ;
-#define HOME_A    LCTL_T(KC_A)
-#define HOME_S    LALT_T(KC_S)
-#define HOME_D    LGUI_T(KC_D)
-#define HOME_F    LSFT_T(KC_F)
-
-#define HOME_J    RSFT_T(KC_J)
-#define HOME_K    RGUI_T(KC_K)
-#define HOME_L    LALT_T(KC_L)
-#define HOME_SCLN RCTL_T(KC_SCLN)
-
-// Same CAGS scheme for the Colemak home row: A R S T | N E I O
-#define COLE_A    LCTL_T(KC_A)
-#define COLE_R    LALT_T(KC_R)
-#define COLE_S    LGUI_T(KC_S)
-#define COLE_T    LSFT_T(KC_T)
-
-#define COLE_N    RSFT_T(KC_N)
-#define COLE_E    RGUI_T(KC_E)
-#define COLE_I    LALT_T(KC_I)
-#define COLE_O    RCTL_T(KC_O)
+// AeroSpace chords -- the _AERO layer fires the ctrl+alt (and ctrl+alt+shift)
+// combos straight from ~/.config/aerospace/aerospace.toml, so AeroSpace needs no
+// remap of its own. AeroSpace's key-mapping preset is 'qwerty', so these send
+// raw keycodes and AeroSpace reads the QWERTY-position letter/number/symbol --
+// independent of whichever base layer (Colemak/QWERTY) is active here.
+#define AS_MOD(kc)  LCTL(LALT(kc))         // ctrl + alt + kc        (switch / focus / act)
+#define AS_MODS(kc) LCTL(LALT(LSFT(kc)))   // ctrl + alt + shift + kc (move window / variants)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  // QWERTY base -- layers are reached from the thumb cluster (see the header
-  // comment), identical to the Colemak base, so muscle memory carries over.
+  // QWERTY base -- pure letters on the home row (no mod-taps). Modifiers and
+  // layers are reached from the one-shot keys around the edges; identical to the
+  // Colemak base so muscle memory carries over.
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_NO,
+     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    TT(_MEDIA),
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_NO,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
+     TG(_NAV),KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    TG(_NUM),
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC,  HOME_A,  HOME_S,  HOME_D,  HOME_F,  KC_G,                               KC_H,    HOME_J,  HOME_K,  HOME_L,  HOME_SCLN, KC_QUOT,
+     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_TAB,  KC_DEL,  KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  KC_ENT,        KC_BSPC,       KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                       TT(_MEDIA), LT(_NUM,KC_SPC), LT(_NAV,KC_ENT),   LT(_SYM2,KC_BSPC), LT(_SYM,KC_SPC), KC_RALT
+              KC_NO,         KC_SPC, OSL(_SYM),              TG(_AERO),   KC_NO,  KC_NO
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
   [_COLEMAK] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_NO,
+     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    TT(_MEDIA),
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_NO,   KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                               KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_DEL,
+     TG(_NAV),KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                               KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, TG(_NUM),
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC,  COLE_A,  COLE_R,  COLE_S,  COLE_T,  KC_G,                               KC_M,    COLE_N,  COLE_E,  COLE_I,  COLE_O,  KC_QUOT,
+     KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                               KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_TAB,  KC_DEL,  KC_K,    KC_H,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,  KC_ENT,        KC_BSPC,       KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                       TT(_MEDIA), LT(_NUM,KC_SPC), LT(_NAV,KC_ENT),   LT(_SYM2,KC_BSPC), LT(_SYM,KC_SPC), KC_RALT
+              KC_NO,         KC_SPC, OSL(_SYM),              TG(_AERO),   KC_NO,  KC_NO
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  // SYM -- hold right Space. Bracket pairs live on the LEFT hand, open next
-  // to close: ` [ ] < > on the upper row, ~ { } ( ) on the home row. Tap the
-  // top-left key (Esc position) to lock the layer hands-free; tap again to release.
+  // SYM -- tap OSL(SYM) (left inner thumb) for one symbol, then it auto-exits;
+  // double-tap to lock it on. Brackets live on the LEFT hand, open next to close
+  // (` [ ] < > over ~ { } ( )); the less-common symbols live on the RIGHT hand
+  // (_ + | over - = \). Modifiers are not here -- they live on the base-layer
+  // home-row combos (see the bottom of this file).
   [_SYM] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_LLCK, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_GRV,  KC_LBRC, KC_RBRC, KC_LABK, KC_RABK,                            _______, _______, _______, _______, _______, _______,
+     _______, KC_GRV,  KC_LBRC, KC_RBRC, KC_LABK, KC_RABK,                            _______, _______, KC_UNDS, KC_PLUS, KC_PIPE, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_TILD, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN,                            _______, _______, _______, _______, _______, _______,
+     _______, KC_TILD, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN,                            _______, _______, KC_MINS, KC_EQL,  KC_BSLS, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -102,17 +113,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  // NAV -- hold Enter. Arrows on the right home row, Home/PgDn/PgUp/End
-  // above them. The left home row carries dedicated CAGS modifiers
-  // (Ctrl/Alt/Cmd/Shift) for Shift/Cmd/Opt + arrow selection. Tap the top-left
-  // key (Esc) to lock the layer; tap again to release.
+  // NAV -- tap TG(NAV) (left pinky, row 1) to enter, tap again to leave. Arrows
+  // on the right home row, Home/PgDn/PgUp/End above them. The left home row
+  // carries one-shot CAGS modifiers (Ctrl/Alt/Cmd/Shift) -- tap a mod then an
+  // arrow to jump/select, or hold the mod while tapping arrows to extend a range.
   [_NAV] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_LLCK, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______,                            KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
+     _______, OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), OSM(MOD_LSFT), _______,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -120,10 +131,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  // NUM -- hold left Space. Calculator-style numpad on the right hand (7 8 9 /
-  // 4 5 6 / 1 2 3) with 0 on the right outer thumb (the base-layer RAlt key).
-  // The left hand carries a Left Shift (for shifted digits) and MO(_SYM2) for
-  // the nested symbol layer.
+  // NUM -- tap TG(NUM) (right pinky, row 1) to enter, tap again to leave.
+  // Calculator-style numpad on the right hand (7 8 9 / 4 5 6 / 1 2 3) with 0 on
+  // the right outer thumb. Operators and = live on the SYM layer.
   [_NUM] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
@@ -132,30 +142,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______,                            _______, KC_4,    KC_5,    KC_6,    _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_LSFT, MO(_SYM2), _______, _______, _______, _______,  _______, _______, KC_1,    KC_2,    KC_3,    _______, _______,
+     _______, _______, _______, _______, _______, _______, _______,  _______, _______, KC_1,    KC_2,    KC_3,    _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, KC_0
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  // SYM2 -- hold Backspace (right thumb), or nested under NUM (hold left Space,
-  // then hold X). The less-common symbols on the right hand: _ + | on the upper
-  // row, - = \ on the home row.
-  [_SYM2] = LAYOUT(
-  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, _______, KC_UNDS, KC_PLUS, KC_PIPE, _______,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, _______, KC_MINS, KC_EQL,  KC_BSLS, _______,
-  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______,
-  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, _______, _______
-                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ),
-
-  // MEDIA -- TT toggle (tap the left-outer thumb to enter, tap again to leave).
+  // MEDIA -- TT toggle (tap the top-right corner to enter, tap again to leave).
   // Left hand: media transport + volume, with DF(_QWERTY)/DF(_COLEMAK) base
   // switches on the bottom row. Right hand: RGB controls. QK_BOOT and EE_CLR
   // sit in the top-right / right-pinky corners for reflashing.
@@ -171,25 +164,76 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
+  // AERO -- AeroSpace window-manager control. Tap TG(_AERO) (right inner thumb,
+  // mirror of the SYM trigger) to enter, tap again to leave. Every key fires a
+  // ctrl+alt(+shift) chord straight from aerospace.toml; nothing here types a
+  // letter. Mental split: LEFT hand = workspaces, RIGHT hand = the focused
+  // window.
+  //
+  //   LEFT  -- workspace SWITCH on top, MOVE-window-to-workspace directly below:
+  //     row0  1 2 3 4 5            row1  (shift) move win -> 1 2 3 4 5
+  //     row2  Z G S | close newwin row3  (shift) move win -> Z G S | resize/service mode
+  //   RIGHT -- act on the focused window:
+  //     row0  focus prev/next | layout tiles/accordion | fullscreen
+  //     row1  MOVE window  left/down/up/right | layout floating   (ctrl+alt+shift+arrows)
+  //     row2  FOCUS window left/down/up/right                     (ctrl+alt+arrows, NAV-style home row)
+  //     row3  resize - +  | rotate / rotate-rev | cycle padding
+  [_AERO] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     _______, AS_MOD(KC_1),  AS_MOD(KC_2),  AS_MOD(KC_3),  AS_MOD(KC_4),  AS_MOD(KC_5),         AS_MODS(KC_TAB), AS_MOD(KC_TAB), AS_MOD(KC_SLSH), AS_MOD(KC_COMM), AS_MOD(KC_F),    _______,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     _______, AS_MODS(KC_1), AS_MODS(KC_2), AS_MODS(KC_3), AS_MODS(KC_4), AS_MODS(KC_5),        _______,         AS_MODS(KC_LEFT), AS_MODS(KC_DOWN), AS_MODS(KC_UP), AS_MODS(KC_RGHT), AS_MODS(KC_SPC),
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     _______, AS_MOD(KC_Z),  AS_MOD(KC_G),  AS_MOD(KC_S),  AS_MOD(KC_Q),  AS_MOD(KC_ENT),       _______,         AS_MOD(KC_LEFT),  AS_MOD(KC_DOWN),  AS_MOD(KC_UP),  AS_MOD(KC_RGHT),  _______,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     _______, AS_MODS(KC_Z), AS_MODS(KC_G), AS_MODS(KC_S), AS_MOD(KC_R),  AS_MODS(KC_SCLN), _______,  _______, _______, AS_MOD(KC_MINS), AS_MOD(KC_EQL), AS_MOD(KC_O), AS_MODS(KC_O), AS_MOD(KC_P),
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    _______, _______, _______,                   _______, _______, _______
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
 
-// Combos -- ported from the Moonlander. Matched by keycode, so they fire on the
-// Colemak base where W F U Y Q , . are all plain keys. On the QWERTY base the
-// W+F=Tab and L+U=Backspace combos will not fire (F and L are home-row mod-taps
-// there); the other three work on both bases.
-const uint16_t PROGMEM combo_tab[] = {KC_W, KC_F, COMBO_END};
-const uint16_t PROGMEM combo_ent[] = {KC_U, KC_Y, COMBO_END};
-const uint16_t PROGMEM combo_esc[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM combo_del[] = {KC_COMM, KC_DOT, COMBO_END};
+// Utility combos -- ported from the Moonlander, matched by Colemak keycode.
+// W F U Y Q , . L are plain keys on both bases, so these fire on Colemak (and
+// mostly on QWERTY too). The W+F=Tab and ,+.=Del combos are the only Tab/Delete
+// on the board.
+const uint16_t PROGMEM combo_tab[]  = {KC_W, KC_F, COMBO_END};
+const uint16_t PROGMEM combo_ent[]  = {KC_U, KC_Y, COMBO_END};
+const uint16_t PROGMEM combo_esc[]  = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM combo_del[]  = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM combo_bspc[] = {KC_L, KC_U, COMBO_END};
 
+// One-shot modifier combos -- roll two adjacent home-row keys to fire that
+// one-shot mod, on either hand. Finger -> mod follows the old CAGS home-row
+// order (pinky Ctrl, ring Alt, middle Cmd, index Shift): each mod = its finger's
+// home key + the neighbour toward the centre. Shift is the outer pinky+index
+// pinch, since the index has no free inward neighbour. Defined by Colemak
+// keycodes.
+const uint16_t PROGMEM combo_lctl[] = {KC_A, KC_R, COMBO_END};       // pinky+ring
+const uint16_t PROGMEM combo_lalt[] = {KC_R, KC_S, COMBO_END};       // ring+middle
+const uint16_t PROGMEM combo_lgui[] = {KC_S, KC_T, COMBO_END};       // middle+index
+const uint16_t PROGMEM combo_lsft[] = {KC_A, KC_T, COMBO_END};       // pinky+index pinch
+const uint16_t PROGMEM combo_rsft[] = {KC_O, KC_N, COMBO_END};       // pinky+index pinch
+const uint16_t PROGMEM combo_rgui[] = {KC_E, KC_N, COMBO_END};       // middle+index
+const uint16_t PROGMEM combo_ralt[] = {KC_I, KC_E, COMBO_END};       // ring+middle
+const uint16_t PROGMEM combo_rctl[] = {KC_O, KC_I, COMBO_END};       // pinky+ring
+
 combo_t key_combos[] = {
-    COMBO(combo_tab, KC_TAB),
-    COMBO(combo_ent, KC_ENT),
-    COMBO(combo_esc, KC_ESC),
-    COMBO(combo_del, KC_DEL),
+    COMBO(combo_tab,  KC_TAB),
+    COMBO(combo_ent,  KC_ENT),
+    COMBO(combo_esc,  KC_ESC),
+    COMBO(combo_del,  KC_DEL),
     COMBO(combo_bspc, KC_BSPC),
+    COMBO(combo_lctl, OSM(MOD_LCTL)),
+    COMBO(combo_lalt, OSM(MOD_LALT)),
+    COMBO(combo_lgui, OSM(MOD_LGUI)),
+    COMBO(combo_lsft, OSM(MOD_LSFT)),
+    COMBO(combo_rsft, OSM(MOD_RSFT)),
+    COMBO(combo_rgui, OSM(MOD_RGUI)),
+    COMBO(combo_ralt, OSM(MOD_RALT)),
+    COMBO(combo_rctl, OSM(MOD_RCTL)),
 };
 
 // Set a solid color from an HSV_* macro while KEEPING the current brightness.
@@ -227,25 +271,9 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
     return state;
 }
 
-// While NAV or SYM is locked, hold its indicator color so you can't forget the
-// layer is on; restore the base-layer color when it unlocks.
-bool layer_lock_set_user(layer_state_t locked_layers) {
-    if (is_layer_locked(_NAV)) {
-        set_solid_hs(HSV_GREEN);
-    } else if (is_layer_locked(_SYM)) {
-        set_solid_hs(HSV_GOLD);
-    } else {
-        apply_base_layer_rgb();
-    }
-    return true;
-}
-
-// Tint the board to match whichever momentary layer is active. Locked NAV/SYM
-// keep their indicators (handled above), so bail out early when locked.
+// Tint the board to match whichever layer is active. NAV and NUM are toggles, so
+// the color stays on as a persistent reminder until you tap the toggle off.
 layer_state_t layer_state_set_user(layer_state_t state) {
-    if (is_layer_locked(_NAV) || is_layer_locked(_SYM)) {
-        return state;
-    }
     switch (get_highest_layer(state)) {
         case _SYM:
             set_solid_hs(HSV_GOLD);
@@ -256,11 +284,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         case _NUM:
             set_solid_hs(HSV_ORANGE);
             break;
-        case _SYM2:
-            set_solid_hs(HSV_PURPLE);
-            break;
         case _MEDIA:
             set_solid_hs(HSV_TEAL);
+            break;
+        case _AERO:
+            set_solid_hs(HSV_PURPLE);
             break;
         default:  // back on a base layer
             apply_base_layer_rgb();
