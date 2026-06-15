@@ -41,21 +41,21 @@ layers:
   - Z
   - X
   - C
-  - LT( NUM,V)
+  - V
   - B
   - TAB
   - DEL
   - N
-  - LT( SYM,M)
+  - M
   - ','
   - .
   - /
   - RSFT
   - TT( MEDIA)
-  - LT( NAV,SPC)
-  - ENT
-  - BSPC
-  - SPC
+  - {t: SPC, h: NUM}
+  - {t: ENT, h: NAV}
+  - {t: BSPC, h: SYM2}
+  - {t: SPC, h: SYM}
   - RALT
   Colemak:
   - QK GESC
@@ -98,21 +98,21 @@ layers:
   - Z
   - X
   - C
-  - LT( NUM,D)
+  - D
   - V
   - TAB
   - DEL
   - K
-  - LT( SYM,H)
+  - H
   - ','
   - .
   - /
   - RSFT
   - TT( MEDIA)
-  - LT( NAV,SPC)
-  - ENT
-  - BSPC
-  - SPC
+  - {t: SPC, h: NUM}
+  - {t: ENT, h: NAV}
+  - {t: BSPC, h: SYM2}
+  - {t: SPC, h: SYM}
   - RALT
   SYM:
   - QK LLCK
@@ -402,5 +402,6 @@ layers:
 combos:
   - {p: [14, 15], k: TAB, l: [Colemak]}
   - {p: [20, 21], k: ENTER, l: [Colemak]}
-  - {p: [38, 39], k: ESC, l: [Colemak]}
+  - {p: [13, 14], k: ESC, l: [Colemak]}
   - {p: [46, 47], k: DEL, l: [Colemak]}
+  - {p: [19, 20], k: BSPC, l: [Colemak]}

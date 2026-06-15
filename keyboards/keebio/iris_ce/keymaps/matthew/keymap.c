@@ -8,16 +8,18 @@
 // keeps its own QWERTY base instead. The Moonlander has no window-manager
 // layer, so that is dropped too.
 //
-// Layer access (same physical keys as the Moonlander):
-//   hold left Space  -> NAV    (arrows / home-end / page on the right hand)
-//   hold D           -> NUM    (numpad on the right hand)
-//     hold X in NUM  -> SYM2   (_ + | - = \  -- nested, like Moonlander MO(5))
-//   hold H           -> SYM    (bracket pairs on the left hand)
+// Layer access -- all on the thumb cluster (tap = the legend, hold = the layer):
+//   hold left Space  -> NUM    (numpad on the right hand)
+//   hold Enter       -> NAV    (arrows / home-end / page on the right hand)
+//   hold right Space -> SYM    (bracket pairs on the left hand)
+//   hold Backspace   -> SYM2   (_ + | - = \  on the right hand)
+//     hold X in NUM  -> SYM2   (also reachable nested, like Moonlander MO(5))
 //   tap left-outer   -> MEDIA  (TT toggle: media transport + RGB)
 //
-// Combos (defined by keycode, so they fire on the Colemak base; on QWERTY only
-// the W+F=Tab combo is affected because F is a home-row mod-tap there):
-//   W+F = Tab   U+Y = Enter   X+C = Esc   , + . = Delete
+// Combos (defined by keycode, so they fire on the Colemak base; on QWERTY the
+// W+F=Tab and L+U=Backspace combos won't fire because F and L are home-row
+// mod-taps there):
+//   W+F = Tab   U+Y = Enter   Q+W = Esc   , + . = Delete   L+U = Backspace
 enum custom_layers {
      _QWERTY,
      _COLEMAK,
@@ -53,9 +55,8 @@ enum custom_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  // QWERTY base -- the layer-hold keys (NUM, SYM) sit on the same physical
-  // positions as the Colemak base so muscle memory carries over: NUM on the
-  // left-index lower key, SYM on the right-index lower key.
+  // QWERTY base -- layers are reached from the thumb cluster (see the header
+  // comment), identical to the Colemak base, so muscle memory carries over.
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_NO,
@@ -64,9 +65,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC,  HOME_A,  HOME_S,  HOME_D,  HOME_F,  KC_G,                               KC_H,    HOME_J,  HOME_K,  HOME_L,  HOME_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    LT(_NUM,KC_V), KC_B, KC_TAB,  KC_DEL,  KC_N, LT(_SYM,KC_M), KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_TAB,  KC_DEL,  KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                              TT(_MEDIA), LT(_NAV,KC_SPC), KC_ENT,        KC_BSPC, KC_SPC, KC_RALT
+                       TT(_MEDIA), LT(_NUM,KC_SPC), LT(_NAV,KC_ENT),   LT(_SYM2,KC_BSPC), LT(_SYM,KC_SPC), KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -78,13 +79,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC,  COLE_A,  COLE_R,  COLE_S,  COLE_T,  KC_G,                               KC_M,    COLE_N,  COLE_E,  COLE_I,  COLE_O,  KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    LT(_NUM,KC_D), KC_V, KC_TAB,  KC_DEL,  KC_K, LT(_SYM,KC_H), KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_TAB,  KC_DEL,  KC_K,    KC_H,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                              TT(_MEDIA), LT(_NAV,KC_SPC), KC_ENT,        KC_BSPC, KC_SPC, KC_RALT
+                       TT(_MEDIA), LT(_NUM,KC_SPC), LT(_NAV,KC_ENT),   LT(_SYM2,KC_BSPC), LT(_SYM,KC_SPC), KC_RALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  // SYM -- hold H (right index). Bracket pairs live on the LEFT hand, open next
+  // SYM -- hold right Space. Bracket pairs live on the LEFT hand, open next
   // to close: ` [ ] < > on the upper row, ~ { } ( ) on the home row. Tap the
   // top-left key (Esc position) to lock the layer hands-free; tap again to release.
   [_SYM] = LAYOUT(
@@ -101,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  // NAV -- hold left Space. Arrows on the right home row, Home/PgDn/PgUp/End
+  // NAV -- hold Enter. Arrows on the right home row, Home/PgDn/PgUp/End
   // above them. The left home row carries dedicated CAGS modifiers
   // (Ctrl/Alt/Cmd/Shift) for Shift/Cmd/Opt + arrow selection. Tap the top-left
   // key (Esc) to lock the layer; tap again to release.
@@ -119,9 +120,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  // NUM -- hold D. Calculator-style numpad on the right hand (7 8 9 / 4 5 6 /
-  // 1 2 3) with 0 on the right outer thumb (the base-layer RAlt key). The left hand carries a Left Shift
-  // (for shifted digits) and MO(_SYM2) for the nested symbol layer.
+  // NUM -- hold left Space. Calculator-style numpad on the right hand (7 8 9 /
+  // 4 5 6 / 1 2 3) with 0 on the right outer thumb (the base-layer RAlt key).
+  // The left hand carries a Left Shift (for shifted digits) and MO(_SYM2) for
+  // the nested symbol layer.
   [_NUM] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
@@ -136,8 +138,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
-  // SYM2 -- nested under NUM (hold D, then hold X). The less-common symbols on
-  // the right hand: _ + | on the upper row, - = \ on the home row.
+  // SYM2 -- hold Backspace (right thumb), or nested under NUM (hold left Space,
+  // then hold X). The less-common symbols on the right hand: _ + | on the upper
+  // row, - = \ on the home row.
   [_SYM2] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
@@ -172,19 +175,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 // Combos -- ported from the Moonlander. Matched by keycode, so they fire on the
-// Colemak base where W F U Y X C , . are all plain keys. On the QWERTY base the
-// W+F=Tab combo will not fire (F is a home-row mod-tap there); the other three
-// work on both bases.
+// Colemak base where W F U Y Q , . are all plain keys. On the QWERTY base the
+// W+F=Tab and L+U=Backspace combos will not fire (F and L are home-row mod-taps
+// there); the other three work on both bases.
 const uint16_t PROGMEM combo_tab[] = {KC_W, KC_F, COMBO_END};
 const uint16_t PROGMEM combo_ent[] = {KC_U, KC_Y, COMBO_END};
-const uint16_t PROGMEM combo_esc[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM combo_esc[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_del[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM combo_bspc[] = {KC_L, KC_U, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_tab, KC_TAB),
     COMBO(combo_ent, KC_ENT),
     COMBO(combo_esc, KC_ESC),
     COMBO(combo_del, KC_DEL),
+    COMBO(combo_bspc, KC_BSPC),
 };
 
 // Set a solid color from an HSV_* macro while KEEPING the current brightness.

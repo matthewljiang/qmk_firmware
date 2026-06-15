@@ -5,7 +5,7 @@ Moonlander's gaming QWERTY layer is dropped; this board keeps its own QWERTY
 base. There is no window-manager layer (the Moonlander didn't have one).
 
 Two base layouts (Colemak + QWERTY), CAGS home-row mods, four hold-to-reach
-layers, and four combos.
+layers, and five combos.
 
 ---
 
@@ -13,16 +13,17 @@ layers, and four combos.
 
 | Hold | Layer | What's on it |
 |---|---|---|
-| **Left Space** (left-mid thumb) | **NAV** | arrows + Home/End/PgUp/PgDn (right hand) |
-| **D** (left index, lower row) | **NUM** | numpad (right hand) |
-| **X** while in NUM | **SYM2** | `_ + \| - = \` (right hand) |
-| **H** (right index, lower row) | **SYM** | bracket pairs (left hand) |
+| **Left Space** (left-mid thumb) | **NUM** | numpad (right hand) |
+| **Enter** (left-inner thumb) | **NAV** | arrows + Home/End/PgUp/PgDn (right hand) |
+| **Right Space** (right-mid thumb) | **SYM** | bracket pairs (left hand) |
+| **Backspace** (right-outer thumb) | **SYM2** | `_ + \| - = \` (right hand) |
+| **X** while in NUM | **SYM2** | (also reachable nested under NUM) |
 | **left-outer thumb** (`TT`, tap) | **MEDIA** | media transport + RGB |
 
 `TT(MEDIA)` is a toggle: tap to enter, tap again to leave (or hold for momentary).
 
-> On the QWERTY base the NUM/SYM holds sit on the same physical keys (left-index
-> lower / right-index lower), so the muscle memory carries across both layouts.
+> All layers are reached from the thumb cluster, so access is identical on both
+> the Colemak and QWERTY bases.
 
 ---
 
@@ -30,23 +31,24 @@ layers, and four combos.
 
 | | outer | middle | inner |
 |---|---|---|---|
-| **Left**  | `TT` MEDIA | Space / **NAV** (hold) | Enter |
-| **Right** | Backspace | Space | Right Alt |
+| **Left**  | `TT` MEDIA | Space / **NUM** (hold) | Enter / **NAV** (hold) |
+| **Right** | Backspace / **SYM2** (hold) | Space / **SYM** (hold) | Right Alt |
 
 ---
 
 ## Combos
 
 Matched by keycode (so they fire on the Colemak base, where these are all plain
-keys). On the QWERTY base only `W+F`=Tab is affected — `F` is a home-row mod-tap
-there — the other three work on both.
+keys). On the QWERTY base `W+F`=Tab and `L+U`=Backspace don't fire — `F` and `L`
+are home-row mod-taps there — the other three work on both.
 
 | Combo | Output |
 |---|---|
 | `W` + `F` | Tab |
 | `U` + `Y` | Enter |
-| `X` + `C` | Esc |
+| `Q` + `W` | Esc |
 | `,` + `.` | Delete |
+| `L` + `U` | Backspace |
 
 ---
 
