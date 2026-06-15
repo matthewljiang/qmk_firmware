@@ -45,8 +45,8 @@ layers:
   - B
   - TAB
   - DEL
-  - LT( SYM,M)
   - N
+  - LT( SYM,M)
   - ','
   - .
   - /
@@ -102,8 +102,8 @@ layers:
   - V
   - TAB
   - DEL
-  - LT( SYM,H)
   - K
+  - LT( SYM,H)
   - ','
   - .
   - /
@@ -160,7 +160,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: SYM, type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -197,10 +197,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - LCTL
+  - LALT
+  - LGUI
+  - LSFT
   - {t: ▽, type: trans}
   - LEFT
   - DOWN
@@ -223,7 +223,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: NAV, type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -269,6 +269,7 @@ layers:
   - LSFT
   - MO( SYM2)
   - {t: ▽, type: trans}
+  - {t: NUM, type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -282,9 +283,8 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - '0'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   SYM2:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -324,9 +324,9 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - {t: SYM2, type: held}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: NUM, type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -393,7 +393,7 @@ layers:
   - RM SPDU
   - RM SPDD
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: MEDIA, type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
