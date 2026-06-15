@@ -1,25 +1,20 @@
 // Copyright 2024 Matthew Jiang
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
-// Moonlander adaptation of my Iris CE keymap. Mirrors the Iris design as closely
-// as the hardware allows: Colemak Mod-DH + QWERTY bases, CAGS home-row mods, a
-// SpaceFn-style thumb cluster, and FN / NAV / SYM / WM layers with text-editing
-// keys, layer lock, and per-layer RGB.
+// Moonlander adaptation of my Iris CE keymap. Synced to the Iris hold-free
+// philosophy: home-row mods removed, modifiers now fired by one-shot combos on
+// adjacent home-row pairs (same CAGS finger identity -- pinky Ctrl, ring Alt,
+// middle Cmd, index Shift):
+//   A+R Ctrl   R+S Alt   S+T Cmd   A+T Shift   (left, Colemak)
+//   O+I Ctrl   I+E Alt   E+N Cmd   O+N Shift   (right, Colemak)
 //
-// Mapping notes (Moonlander has more keys than the Iris):
-//   - The Iris's six main columns per hand map 1:1 onto the Moonlander's outer
-//     six columns (x0-x5 left, x11-x16 right).
-//   - The Iris reaches _FN by holding inner bottom-row keys. Here those
-//     LT(_FN, Home/End) keys live on the Moonlander's extra inner-index column
-//     on the home row (left x6, right x10), tapped for Home/End as on the Iris.
-//   - The Iris thumbs are placed on the Moonlander's most comfortable thumb
-//     positions rather than its far lower arc. Each hand's primary lands on the
-//     big red key, the next on the small key directly below it:
-//       big red : WM/Tab (left)        | NAV/Space (right, primary)
-//       below   : Enter  (left)        | SYM/Bksp  (right)
-//       arc     : LGUI   (left)        | RALT      (right)
-//     The outer arc key on each side, the extra inner column on rows 0/1, and
-//     the extra bottom row are left KC_NO on base / transparent elsewhere.
+// Layer access (held, Moonlander thumb cluster and inner-index column):
+//   big red left  : WM/Tab (hold)       big red right : NAV/Space (hold)
+//   below left    : Enter               below right   : SYM/Bksp (hold)
+//   inner-index   : FN/Home (hold)      inner-index   : FN/End (hold)
+//
+// Other combos (matched by Colemak keycode):
+//   W+F = Tab   U+Y = Enter   Q+W = Esc   , + . = Delete   L+U = Backspace
 
 #include QMK_KEYBOARD_H
 
@@ -32,28 +27,9 @@ enum custom_layers {
      _WM
 };
 
-// Home row mods (CAGS: Ctrl, Alt, GUI/Cmd, Shift) -- tuned for macOS
-// QWERTY home row: A S D F | J K L ;
-#define HOME_A    LCTL_T(KC_A)
-#define HOME_S    LALT_T(KC_S)
-#define HOME_D    LGUI_T(KC_D)
-#define HOME_F    LSFT_T(KC_F)
-
-#define HOME_J    RSFT_T(KC_J)
-#define HOME_K    RGUI_T(KC_K)
-#define HOME_L    LALT_T(KC_L)
-#define HOME_SCLN RCTL_T(KC_SCLN)
-
-// Same CAGS scheme for the Colemak home row: A R S T | N E I O
-#define COLE_A    LCTL_T(KC_A)
-#define COLE_R    LALT_T(KC_R)
-#define COLE_S    LGUI_T(KC_S)
-#define COLE_T    LSFT_T(KC_T)
-
-#define COLE_N    RSFT_T(KC_N)
-#define COLE_E    RGUI_T(KC_E)
-#define COLE_I    LALT_T(KC_I)
-#define COLE_O    RCTL_T(KC_O)
+// AeroSpace chords (same macros as the Iris _AERO layer).
+#define AS_MOD(kc)  LCTL(LALT(kc))         // ctrl + alt + kc
+#define AS_MODS(kc) LCTL(LALT(LSFT(kc)))   // ctrl + alt + shift + kc
 
 // Thumb / inner-index layer-taps (tap = key / hold = layer).
 #define FN_HOME   LT(_FN,  KC_HOME)
@@ -67,8 +43,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT(
     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_NO,             KC_NO,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_NO,
     KC_NO,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,             KC_NO,   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
-    KC_ESC,  HOME_A,  HOME_S,  HOME_D,  HOME_F,  KC_G,    FN_HOME,           FN_END,  KC_H,    HOME_J,  HOME_K,  HOME_L,  HOME_SCLN, KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    FN_HOME,           FN_END,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_SPC,           WM_TAB,            NAV_SPC,          KC_SPC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,
                                         KC_ENT,  KC_LGUI, KC_NO,             KC_RALT, SYM_BSPC, KC_NO
   ),
@@ -76,8 +52,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = LAYOUT(
     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_NO,             KC_NO,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_NO,
     KC_NO,   KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_NO,             KC_NO,   KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_DEL,
-    KC_ESC,  COLE_A,  COLE_R,  COLE_S,  COLE_T,  KC_G,    FN_HOME,           FN_END,  KC_M,    COLE_N,  COLE_E,  COLE_I,  COLE_O,  KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                                KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+    KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    FN_HOME,           FN_END,  KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+    CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                                KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_SPC,           WM_TAB,            NAV_SPC,          KC_SPC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,
                                         KC_ENT,  KC_LGUI, KC_NO,             KC_RALT, SYM_BSPC, KC_NO
   ),
@@ -112,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NAV] = LAYOUT(
     QK_LLCK, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,           KC_TRNS, KC_TRNS, A(KC_MINS), A(KC_EQL), KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, G(KC_BSPC), A(KC_BSPC), A(KC_DEL), C(KC_K), KC_TRNS, KC_TRNS,   KC_TRNS, A(KC_LEFT), KC_PGDN, KC_PGUP, A(KC_RGHT), OSM(MOD_LSFT), KC_DEL,
-    KC_TRNS, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_TRNS, KC_TRNS,           KC_TRNS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_HOME, KC_END,
+    KC_TRNS, OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), OSM(MOD_LSFT), KC_TRNS, KC_TRNS,   KC_TRNS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_HOME, KC_END,
     KC_TRNS, G(KC_Z), G(KC_X), G(KC_C), G(KC_V), SGUI(KC_Z),                          G(KC_A), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS,           KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                         KC_TRNS, KC_TRNS, KC_TRNS,           KC_TRNS, KC_TRNS, KC_TRNS
@@ -132,22 +108,66 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         KC_TRNS, KC_TRNS, KC_TRNS,           KC_TRNS, KC_TRNS, KC_TRNS
   ),
 
-  // Window-manager layer -- hold left-middle thumb (WM/Tab) or lock it on. Each
-  // key synthesizes the Ctrl+Alt(+Shift) chord AeroSpace already listens for.
-  //   Right hand : focus (Ctrl+Alt+arrow) on the home row H J K L; move
-  //                (Ctrl+Alt+Shift+arrow) on the row above; resize -/+ on the
-  //                right home pinky; workspace back-and-forth + fullscreen.
-  //   Left hand  : switch workspace 1-5 (number row), move-to workspace 1-5
-  //                (row below), lettered actions on the bottom row.
-  //   QK_LLCK    : top-left, locks the layer on. Glows purple.
+  // Window-manager / AeroSpace layer -- hold left-middle thumb (WM/Tab) or lock
+  // it on with QK_LLCK. Fires ctrl+alt(+shift) chords from aerospace.toml
+  // directly (AeroSpace preset 'qwerty', so keycodes are QWERTY-position).
+  //
+  //   LEFT  -- workspaces:
+  //     num row  switch to workspace 1-5          (ctrl+alt+1..5)
+  //     row 1    move window to workspace 1-5     (ctrl+alt+shift+1..5)
+  //     home row Z G S Q | close / new-win        (ctrl+alt+Z/G/S/Q/Enter)
+  //     bottom   (shift variants) Z G S | resize/service mode
+  //   RIGHT -- focused window:
+  //     num row  focus prev/next | layout tiles/accordion | fullscreen
+  //     row 1    MOVE window left/down/up/right | layout floating
+  //     home row FOCUS window left/down/up/right  (ctrl+alt+arrows)
+  //     bottom   resize -/+ | rotate | cycle padding | fullscreen-zoom
   [_WM] = LAYOUT(
-    QK_LLCK, C(A(KC_1)), C(A(KC_2)), C(A(KC_3)), C(A(KC_4)), C(A(KC_5)), KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, C(A(S(KC_1))), C(A(S(KC_2))), C(A(S(KC_3))), C(A(S(KC_4))), C(A(S(KC_5))), KC_TRNS,  KC_TRNS, C(A(S(KC_LEFT))), C(A(S(KC_DOWN))), C(A(S(KC_UP))), C(A(S(KC_RGHT))), C(A(KC_TAB)), C(A(KC_F)),
-    KC_TRNS, C(A(KC_ENT)), C(A(KC_S)), C(A(S(KC_SPC))), KC_TRNS, C(A(KC_G)), KC_TRNS, KC_TRNS, C(A(KC_LEFT)), C(A(KC_DOWN)), C(A(KC_UP)), C(A(KC_RGHT)), C(A(KC_MINS)), C(A(KC_EQL)),
-    KC_TRNS, C(A(KC_Z)), C(A(KC_Q)), C(A(KC_O)), C(A(KC_P)), C(A(KC_SLSH)),                    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    QK_LLCK, AS_MOD(KC_1),  AS_MOD(KC_2),  AS_MOD(KC_3),  AS_MOD(KC_4),  AS_MOD(KC_5),  KC_TRNS,   KC_TRNS, AS_MODS(KC_TAB), AS_MOD(KC_TAB), AS_MOD(KC_SLSH), AS_MOD(KC_COMM), AS_MOD(KC_F),    KC_TRNS,
+    KC_TRNS, AS_MODS(KC_1), AS_MODS(KC_2), AS_MODS(KC_3), AS_MODS(KC_4), AS_MODS(KC_5), KC_TRNS,   KC_TRNS, KC_TRNS,         AS_MODS(KC_LEFT), AS_MODS(KC_DOWN), AS_MODS(KC_UP), AS_MODS(KC_RGHT), AS_MODS(KC_SPC),
+    KC_TRNS, AS_MOD(KC_Z),  AS_MOD(KC_G),  AS_MOD(KC_S),  AS_MOD(KC_Q),  AS_MOD(KC_ENT), KC_TRNS,  KC_TRNS, KC_TRNS,         AS_MOD(KC_LEFT),  AS_MOD(KC_DOWN),  AS_MOD(KC_UP),  AS_MOD(KC_RGHT),  KC_TRNS,
+    KC_TRNS, AS_MODS(KC_Z), AS_MODS(KC_G), AS_MODS(KC_S), AS_MOD(KC_R),  AS_MODS(KC_SCLN),                  KC_TRNS, AS_MOD(KC_MINS), AS_MOD(KC_EQL), AS_MOD(KC_O), AS_MODS(KC_O), AS_MOD(KC_P),
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS,           KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                         KC_TRNS, KC_TRNS, KC_TRNS,           KC_TRNS, KC_TRNS, KC_TRNS
   ),
+};
+
+// Utility combos -- matched by Colemak keycode (fire on the Colemak base;
+// on QWERTY the W+F and L+U combos won't fire because F/L are at different
+// physical positions). W+F=Tab and ,+.=Del are the only Tab/Delete on base.
+const uint16_t PROGMEM combo_tab[]  = {KC_W, KC_F, COMBO_END};
+const uint16_t PROGMEM combo_ent[]  = {KC_U, KC_Y, COMBO_END};
+const uint16_t PROGMEM combo_esc[]  = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM combo_del[]  = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM combo_bspc[] = {KC_L, KC_U, COMBO_END};
+
+// One-shot modifier combos -- roll two adjacent home-row keys for that mod.
+// Finger -> mod follows CAGS order (pinky Ctrl, ring Alt, middle Cmd, index
+// Shift). Shift is the pinky+index pinch (index has no free inward neighbour).
+// Defined by Colemak keycodes (A R S T left | N E I O right).
+const uint16_t PROGMEM combo_lctl[] = {KC_A, KC_R, COMBO_END};
+const uint16_t PROGMEM combo_lalt[] = {KC_R, KC_S, COMBO_END};
+const uint16_t PROGMEM combo_lgui[] = {KC_S, KC_T, COMBO_END};
+const uint16_t PROGMEM combo_lsft[] = {KC_A, KC_T, COMBO_END};
+const uint16_t PROGMEM combo_rsft[] = {KC_O, KC_N, COMBO_END};
+const uint16_t PROGMEM combo_rgui[] = {KC_E, KC_N, COMBO_END};
+const uint16_t PROGMEM combo_ralt[] = {KC_I, KC_E, COMBO_END};
+const uint16_t PROGMEM combo_rctl[] = {KC_O, KC_I, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(combo_tab,  KC_TAB),
+    COMBO(combo_ent,  KC_ENT),
+    COMBO(combo_esc,  KC_ESC),
+    COMBO(combo_del,  KC_DEL),
+    COMBO(combo_bspc, KC_BSPC),
+    COMBO(combo_lctl, OSM(MOD_LCTL)),
+    COMBO(combo_lalt, OSM(MOD_LALT)),
+    COMBO(combo_lgui, OSM(MOD_LGUI)),
+    COMBO(combo_lsft, OSM(MOD_LSFT)),
+    COMBO(combo_rsft, OSM(MOD_RSFT)),
+    COMBO(combo_rgui, OSM(MOD_RGUI)),
+    COMBO(combo_ralt, OSM(MOD_RALT)),
+    COMBO(combo_rctl, OSM(MOD_RCTL)),
 };
 
 // Set a solid color from an HSV_* macro while KEEPING the current brightness.

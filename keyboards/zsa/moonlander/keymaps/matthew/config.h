@@ -3,16 +3,29 @@
 
 #pragma once
 
-// ----- Home row mods (tap-hold) tuning -----
+// ----- Tap-hold tuning (for LT() thumb / inner-index keys) -----
+//
+// Home-row mods are gone -- modifiers are fired by combos now. These settings
+// only apply to the remaining layer-tap keys (WM_TAB, NAV_SPC, SYM_BSPC,
+// FN_HOME, FN_END) which are on thumbs or the comfortable inner-index column.
 
-// How long a key must be held before it registers as a modifier.
 #define TAPPING_TERM 200
-
-// Resolve a mod-tap as "hold" when another key is pressed and released within
-// the tapping term. Greatly improves rolling typing with home row mods.
 #define PERMISSIVE_HOLD
-
-// Within this window after a tap, holding the same key repeats the tap instead
-// of acting as a modifier -- allows tap-then-hold auto-repeat while still
-// keeping home row mods responsive.
 #define QUICK_TAP_TERM 120
+
+// ----- One-shot modifiers & layers -----
+
+// A queued one-shot mod waits this long (ms) for its next keypress before
+// giving up -- generous so you're never rushed.
+#define ONESHOT_TIMEOUT 3000
+
+// Tapping a one-shot key this many times locks it on (tap once more to
+// release). Single tap = one-shot; double tap = locked. Applies to both
+// OSM and OSL.
+#define ONESHOT_TAP_TOGGLE 2
+
+// ----- Combos -----
+//
+// Modifiers fire from two-finger adjacent home-row rolls. Keep the window
+// tight so normal typing rolls don't misfire a mod.
+#define COMBO_TERM 40
