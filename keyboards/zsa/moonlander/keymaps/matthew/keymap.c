@@ -34,9 +34,7 @@ enum custom_layers {
 // Thumb / inner-index layer-taps (tap = key / hold = layer).
 #define FN_HOME   LT(_FN,  KC_HOME)
 #define FN_END    LT(_FN,  KC_END)
-#define WM_TAB    LT(_WM,  KC_TAB)
 #define SYM_BSPC  LT(_SYM, KC_BSPC)
-#define NAV_SPC   LT(_NAV, KC_SPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 

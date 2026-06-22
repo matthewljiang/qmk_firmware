@@ -1,240 +1,270 @@
 # Matthew's Iris CE keymap — quick reference
 
-A **hold-free, thumb-light** layout. The original port of my ZSA Moonlander
-Colemak-DHm layout leaned on sustained holds everywhere — home-row mods plus
-layer-tap holds on the thumbs — and that constant holding caused hand tension.
-This version removes holding from the base layer entirely (modifiers and the
-symbol layer are **one-shot taps**, the heavy layers are **toggles**) **and**
-empties the thumb cluster down to three keys: Space, the SYM trigger, and the
-AERO trigger. Modifiers moved onto **home-row combos**.
+A **combo-first, reduced-footprint** Colemak-DHm layout, ported from my latest
+ZSA Moonlander (Oryx) design. The base layer carries **letters and almost
+nothing else** — numbers, symbols, brackets, Tab/Enter/Esc/Backspace and the
+layer launcher are all **combos**, so the physical key count stays tiny and the
+hands barely leave the home block.
 
-Two base layouts (Colemak + QWERTY), five reachable layers, and combos.
-
----
-
-## The big idea: tap, don't hold
-
-| Mechanism | Used for | How it works |
-|---|---|---|
-| **Mod combo** → one-shot mod | Ctrl / Alt / Cmd / Shift | Roll two adjacent home-row keys (two fingers). The **next** key is modified; they chain. |
-| **One-shot layer** (`OSL`) | SYM (symbols) | Tap the trigger, type one symbol, it auto-exits. |
-| **Toggle** (`TG`) | NUM, NAV | Tap to enter, tap again to leave — for sustained sessions. |
-| **Toggle** (`TT`) | MEDIA | Tap to enter, tap again to leave. |
-| **Caps Word** (`CW_TOGG`) | CONSTANT / PascalCase | Tap once, type a word, auto-releases. Replaces holding Shift. |
-
-> **Double-tap to lock.** `ONESHOT_TAP_TOGGLE` is on, so double-tapping the SYM
-> trigger locks the symbol layer for a burst of symbols. Tap once more to release.
-
-> **Holding is always optional.** You *can* hold a mod combo when it helps
-> (e.g. Shift while tapping arrows to extend a selection) — you just never
-> *have* to.
+Two base layouts (Colemak + QWERTY), five extra layers (NAV, FN, WORD, WORK,
+AERO), and a lot of combos.
 
 ---
 
-## Thumb keys
+## The big idea: letters on keys, everything else on combos
 
-The cluster is nearly empty — only three keys are live. Everything else moved to
-combos or off-thumb keys.
+| You want | You press |
+|---|---|
+| a **letter** | the key |
+| a **number** | a vertical same-finger combo (top + home row) |
+| a **symbol / bracket** | a horizontal combo on the home or bottom row |
+| **Tab / Enter / Esc / Backspace** | a two-key utility combo |
+| a **modifier** | a one-shot key on a pinky column or thumb |
+| a **layer** | the `A+R+S+T` launcher combo, or a thumb |
 
-| | outer | middle | inner |
+> **Double-tap to lock.** `ONESHOT_TAP_TOGGLE` is on, so double-tapping any
+> one-shot (a mod, or NAV/FN) locks it on. Tap once more to release. `QK_LLCK`
+> also locks the current layer (auto-releases after 5 s idle).
+
+---
+
+## Modifiers — one-shot, on the edges (the new scheme)
+
+Modifiers are **one-shot (OSM)**: tap a mod, the **next** key is modified; they
+chain (`Shift` then `Cmd` then `T` → `Cmd+Shift+T`) and can be held if you like.
+
+| Mod | Where |
+|---|---|
+| **Ctrl**  | outer pinky column, **home** row — *both* hands |
+| **Alt**   | outer pinky column, **bottom** row — *both* hands |
+| **Shift** | right thumb |
+| **Cmd**   | left thumb (a plain GUI hold — for `Cmd+Tab` / `Cmd+click`) |
+
+> This replaces the old home-row *mod combos*. Those home-row pairs are now
+> numbers and symbols (see below); modifiers moved to the pinky columns + thumbs.
+
+**Caps Word** (`CW_TOGG`, left pinky, top row) covers whole-word capitalization.
+The **NAV** layer also carries one-shot CAGS mods on its left home row for
+select-while-navigating.
+
+---
+
+## Numbers — vertical same-finger combos
+
+Squeeze a finger's **top-row + home-row** key together:
+
+| | pinky | ring | middle | index | inner |
+|---|---|---|---|---|---|
+| **Left**  | `Q+A` = **1** | `W+R` = **2** | `F+S` = **3** | `P+T` = **4** | `B+G` = **5** |
+| **Right** | `'+O` = **0** | `Y+I` = **9** | `U+E` = **8** | `L+N` = **7** | `J+M` = **6** |
+
+The number row (`1`–`0`) is also populated as a backup, but the combos mean you
+rarely reach for it.
+
+---
+
+## Symbols & brackets — horizontal combos
+
+**Home row** (Shift them for `~ _ + |`):
+
+| Combo | Output |
+|---|---|
+| `A` + `R` | `` ` `` |
+| `N` + `E` | `-` |
+| `E` + `I` | `=` |
+| `I` + `O` | `\` |
+
+**Bottom row** — open brackets march across the left hand, close brackets across
+the right:
+
+| Left | | Right | |
 |---|---|---|---|
-| **Left**  | — | Space | SYM **(trigger)** |
-| **Right** | — | — | AERO **(trigger)** |
+| `Z` + `X` | `<` | `K` + `H` | `)` |
+| `X` + `C` | `{` | `H` + `,` | `]` |
+| `C` + `D` | `[` | `,` + `.` | `}` |
+| `D` + `V` | `(` | `.` + `/` | `>` |
 
-Backspace and Enter moved off the thumbs onto the two **inner index keys** (the
-center keys between the halves): Enter (left center), Backspace (right center).
-
----
-
-## Modifiers — home-row combos (one-shot)
-
-Roll **two adjacent home-row keys** (two fingers) to fire that one-shot mod.
-Finger → mod keeps the old CAGS home-row identity — each mod fires from its
-finger's home key plus the neighbour toward the centre. **Shift** is the outer
-pinky+index pinch, since the index has no free inward neighbour. They're on
-**both hands** so you can mod with the hand the letter isn't on:
-
-| finger | mod | left combo (Colemak) | right combo (Colemak) |
-|---|---|---|---|
-| pinky  | **Ctrl**  | `A` + `R` | `O` + `I` |
-| ring   | **Alt**   | `R` + `S` | `I` + `E` |
-| middle | **Cmd**   | `S` + `T` | `E` + `N` |
-| index  | **Shift** | `A` + `T` (pinch) | `O` + `N` (pinch) |
-
-Fire the combo, then tap the letter — they chain in any order. `Cmd+C` = roll
-`E`+`N` (right Cmd), tap `C`. `Cmd+Shift+T` = right Cmd, left Shift, `T`. No
-holding, no thumbs. (You *can* hold a combo to keep the mod down, e.g. Shift +
-arrows to select a range.)
-
-**Caps Word** (left pinky bottom) covers whole-word capitalization. The NAV layer
-also carries the CAGS mods on its left home row for select-while-navigating.
-
-> Combos are tuned for **Colemak** (the keycodes form adjacent home-row pairs
-> there). On QWERTY they land on different keys.
+Everything else (`! @ # $ % ^ & *`, `:`, `"`, `?`, `+`, `_`, `~`, `|`) comes from
+**Shift + the combo above** or Shift + a number.
 
 ---
 
-## Layer access
-
-| Layer | Reach it by | What's on it |
-|---|---|---|
-| **SYM** | tap the trigger (left inner thumb) | all symbols (brackets left, extras right) |
-| **NUM** | tap `TG` (right pinky, row 1) | numpad (right hand) |
-| **NAV** | tap `TG` (left pinky, row 1) | arrows + Home/End/PgUp/PgDn (right hand) + CAGS mods (left hand) |
-| **MEDIA** | tap `TT` (top-right corner) | media transport + RGB |
-| **AERO** | tap `TG` (right inner thumb) | AeroSpace WM control (workspaces left, windows right) |
-
-Board color shows the active layer (see below); NAV/NUM/AERO stay lit until toggled off.
-
----
-
-## Combos
-
-Tuned for Colemak. Two kinds:
-
-**Mods** (see the table above): `A+R` `R+S` `S+T` `A+T` on the left, `O+I` `I+E`
-`E+N` `O+N` on the right.
-
-**Utility** — the only Tab/Delete on the board:
+## Utility combos
 
 | Combo | Output |
 |---|---|
 | `W` + `F` | Tab |
 | `U` + `Y` | Enter |
 | `Q` + `W` | Esc |
-| `,` + `.` | Delete |
 | `L` + `U` | Backspace |
 
-`COMBO_TERM` is 40 ms. The mod pairs are now adjacent home-row letters, which
-*do* get rolled in normal typing (`ar`, `rs`, `st`…), so this tight window is
-what keeps those rolls from firing a mod — both keys must land within 40 ms.
-Bump it **down** if you get misfires while typing, **up** if the mods feel hard
-to trigger.
+> All combos are tuned for **Colemak** positions, so they fire on the Colemak
+> base and *not* on QWERTY (which keeps its own number row and keys instead).
+> `COMBO_TERM` is **40 ms** — tight enough that normal rolls don't misfire, and
+> that the `A+R` (grave) vs. `A+R+S+T` (launcher) overlap resolves cleanly.
+> Bump it down if you get misfires, up if combos feel hard to trigger.
 
 ---
 
-## SYM layer — symbols (tap the trigger, left inner thumb)
+## Thumb cluster
 
-One layer, both hands. Bracket pairs on the **left** (open next to close), the
-less-common symbols on the **right**:
+| | outer | middle | inner | inner-index (center) |
+|---|---|---|---|---|
+| **Left**  | `OSL(FN)` | **Cmd** | **Space** | **Enter** |
+| **Right** | `OSL(NAV)` | **Shift** | **Space** | **Backspace** |
 
-```
-left hand        right hand
-` [ ] < >          _ + |      (upper row)
-~ { } ( )          - = \      (home row)
-```
-
-Tap the trigger, type one symbol, it exits. Double-tap the trigger to lock the
-layer for a run of symbols. (Modifiers are not here — they're home-row combos.)
+Enter/Backspace also exist as combos (`U+Y` / `L+U`); the center keys are a
+convenient duplicate.
 
 ---
 
-## NAV layer — navigation (tap `TG`, left pinky)
+## Layers
+
+| Layer | Reach it by | What's on it | Color |
+|---|---|---|---|
+| **Colemak** (base) | boot default | letters + combos | blue |
+| **QWERTY** (base) | `DF` on FN | plain QWERTY + real number row | red |
+| **NAV** | `OSL(NAV)` (right outer thumb) | arrows + Home/PgDn/PgUp/End; CAGS mods on left home | green |
+| **FN** | `A+R+S+T` combo, or `OSL(FN)` (left outer thumb) | F1–F12, media, volume, RGB, system, base switch, AeroSpace toggle | teal |
+| **WORD** | `N+E+I` combo (right home row) | programming-word combos (two-key rolls) | magenta |
+| **WORK** | `R+S+T` combo (left home row) | sales-tax domain-word combos (two-key rolls) | gold |
+| **AERO** | `TG(AERO)` on FN | AeroSpace WM control | purple |
+
+`QK_LLCK` (top-left on NAV and FN) locks the layer; NAV/FN stay lit while locked.
+
+---
+
+## NAV layer
 
 ```
 Home PgDn PgUp End     (right upper row)
  ←    ↓    ↑    →       (right home row)
 ```
 
-Left home row carries one-shot **Ctrl / Alt / Cmd / Shift**. Tap a mod then an
-arrow to jump/select by word/line; hold the mod while tapping to extend a range.
-Tap `TG(NAV)` again to leave.
+Left home row carries one-shot **Ctrl / Alt / Cmd / Shift** — tap a mod then an
+arrow to jump/select, or hold the mod while arrowing to extend a range. Tap
+`OSL(NAV)` for one move, double-tap (or `QK_LLCK`) to lock for a nav session.
 
 ---
 
-## NUM layer — numpad (tap `TG`, right pinky)
+## FN layer
 
-Right hand, calculator layout; `0` on the right outer thumb. Operators and `=`
-live on the SYM layer.
-
-```
-7 8 9
-4 5 6
-1 2 3
- 0        (right outer thumb)
-```
-
-Tap `TG(NUM)` again to leave.
+- **Number row:** `F1`–`F12`.
+- **Left:** RGB toggle, volume down/up/mute, media prev/stop/play/next, sleep/wake.
+- **Right:** RGB hue/sat/val ±, animation next/prev, speed ±.
+- **Base switches:** `DF(_QWERTY)` / `DF(_COLEMAK)` (bottom-row left).
+- **System:** `QK_BOOT` (right, top), `EE_CLR` (right pinky), `MAC_LOCK` (left).
+- **AeroSpace:** `TG(_AERO)` to enter the window-manager layer.
+- `QK_LLCK` to lock FN on.
 
 ---
 
-## MEDIA layer — media + RGB (`TT`, top-right corner)
+## WORD layer — programming-word combos (`N+E+I` combo)
 
-- **Left:** volume down/up/mute, media prev/stop/play/next, system sleep/wake.
-- **Left bottom row:** `DF(_QWERTY)` / `DF(_COLEMAK)` base switches.
-- **Right:** RGB hue/sat/val ±, animation next/prev, speed ±, toggle.
-- **Corners:** `QK_BOOT` (top-right) and `EE_CLR` (right pinky) for reflashing.
+Squeeze **`N` + `E` + `I`** (the right home row) to toggle the word layer on,
+then **roll a two-key combo** to type a code token. Firing one **auto-exits**
+back to base, so one roll = one word. Tap `N+E+I` again to leave without typing.
+
+This is the part you asked about — **layer-scoped combos**. The word combos are
+gated by `combo_should_trigger()` so they fire *only* while `_WORD` is active;
+on the base layers the same rolls do nothing special, and your numbers/symbols/
+brackets combos are in turn suppressed while you're in word mode. The layer
+itself is transparent — it's just a "mode flag" the word combos read.
+
+Each combo is two letters from the word (mostly first letter + a salient one):
+
+| Combo | Word | Combo | Word | Combo | Word |
+|---|---|---|---|---|---|
+| `R`+`E` | return    | `P`+`B` | public   | `D`+`O` | document |
+| `F`+`N` | function  | `P`+`R` | private  | `O`+`B` | object   |
+| `I`+`M` | import    | `P`+`O` | pointer  | `B`+`L` | boolean  |
+| `E`+`X` | export    | `P`+`A` | params   | `L`+`G` | length   |
+| `I`+`N` | include   | `V`+`R` | variable | `V`+`A` | value    |
+| `I`+`F` | interface | `D`+`E` | define   | `R`+`S` | result   |
+| `C`+`O` | const     | `D`+`F` | default  | `R`+`Q` | request  |
+| `S`+`T` | struct    | `D`+`L` | delete   | `R`+`N` | response |
+| `S`+`G` | string    | `C`+`N` | continue | `U`+`P` | update   |
+| `S`+`W` | switch    | `C`+`X` | context  | `M`+`E` | message  |
+|         |           | `C`+`B` | callback |         |          |
+
+Tokens type with **no trailing space**, so you can append `()`, `;`, `<>`, etc.
+right after. Adding more is two lines: a `cw_*` combo + a `W_*` `SEND_STRING`
+case in `keymap.c` (no key needed — they're pure combos). Combos avoid
+same-finger pairs, so every roll is comfortable.
+
+> The `N+E+I` activation overlaps the base `N+E` (`-`) / `E+I` (`=`) combos;
+> pressing all three within `COMBO_TERM` toggles the layer. Word picks are
+> common cross-language keywords/identifiers — swap freely for your stack
+> (e.g. `typedef`, `namespace`, `iterator`, `println`, `unsigned`).
 
 ---
 
-## AERO layer — AeroSpace WM (tap `TG`, right inner thumb)
+## WORK layer — sales-tax domain combos (`R+S+T` combo)
+
+Squeeze **`R` + `S` + `T`** (the left home row, no pinky) to toggle the domain
+layer, then **roll a two-key combo** to type a sales-tax / tax-software term.
+Firing one **auto-exits**; tap `R+S+T` again to leave without typing. Same
+combo-driven, layer-gated mechanism as the programming layer.
+
+> `R+S+T` is the `A+R+S+T` FN launcher **minus the pinky** — three home keys →
+> work words, add your pinky (`A`) → FN. QMK resolves the nesting by longest
+> match, so press exactly three for WORK, four for FN.
+
+Each combo is mostly the word's **first two letters**:
+
+| Combo | Word | Combo | Word | Combo | Word |
+|---|---|---|---|---|---|
+| `J`+`U` | jurisdiction | `R`+`E` | remittance  | `S`+`O` | sourcing     |
+| `T`+`A` | taxability   | `N`+`X` | nexus       | `M`+`U` | municipality |
+| `E`+`X` | exempt       | `S`+`U` | surcharge   | `L`+`O` | locality     |
+| `C`+`O` | compliance   | `M`+`A` | marketplace | `D`+`I` | district     |
+| `R`+`G` | registration | `F`+`A` | facilitator | `R`+`N` | region       |
+| `C`+`E` | certificate  | `C`+`A` | calculation | `C`+`N` | country      |
+| `T`+`H` | threshold    | `D`+`E` | destination | `A`+`D` | address      |
+| `T`+`R` | transaction  | `I`+`N` | invoice     | `C`+`U` | customer     |
+| `L`+`I` | liability    | `R`+`F` | refund      |         |              |
+
+Words type with **no trailing space** (so you can add `-ion`, `s`, `al`, etc.).
+The programming (`N+E+I`) and domain (`R+S+T`) combos live on separate gated
+layers, so they reuse the same pairs without clashing (e.g. `C+O` = const in
+WORD, compliance in WORK; `R+E` = return vs remittance). Easy to retune — each
+word is a `cwk_*` combo + a `WK_*` `SEND_STRING` case in `keymap.c`. Obvious
+additions for your stack: `exemption`, `taxable`, `remitting`, `province`,
+`territory`, `penalty`, `accrual`, `audit`, `filing`, `origin`.
+
+---
+
+## AERO layer — AeroSpace WM (`TG(AERO)` on FN)
 
 Drives the [AeroSpace](https://github.com/nikitabobko/AeroSpace) tiling WM by
 firing its shortcuts directly — every key sends the `ctrl+alt` (or
 `ctrl+alt+shift`) chord straight from `~/.config/aerospace/aerospace.toml`, so
-AeroSpace needs no config of its own. Toggle on, juggle windows, toggle off.
+AeroSpace needs no config of its own. **Left hand = workspaces, right hand = the
+focused window.** Keys send raw keycodes read through AeroSpace's `qwerty`
+preset, so the layer works the same on either base. The chords are `#define`d as
+`AS_MOD` / `AS_MODS` at the top of `keymap.c`.
 
-> Keys send raw keycodes and AeroSpace reads them through its `qwerty`
-> key-mapping preset, so the layer works the same whether the base is Colemak or
-> QWERTY. If you re-bind something in `aerospace.toml`, update the matching key
-> here (the chords are `#define`d as `AS_MOD` / `AS_MODS` at the top of
-> `keymap.c`).
-
-**Mental split: left hand = workspaces, right hand = the focused window.**
-
-**Left — workspaces** (switch on top, *move the window there* directly below):
-
-```
-WS 1   WS 2  WS 3  WS 4  WS 5         (switch to workspace 1-5)
-Mv→1   Mv→2  Mv→3  Mv→4  Mv→5         (move window to workspace 1-5)
-
-WS Z   WS G  WS S   Close   New-win   (Z=Zoom, G=Gmail, S=Slack; close; new Ghostty)
-Mv→Z   Mv→G  Mv→S   Resize-mode  Service-mode
-```
-
-**Right — the focused window:**
-
-```
-Focus-prev  Focus-next  Tiles  Accordion  Fullscreen      (upper row)
-Move ←  Move ↓  Move ↑  Move →   Floating                 (move window — ctrl+alt+shift+arrows)
-Focus ←  Focus ↓  Focus ↑  Focus →                        (focus window — same home-row spots as NAV's arrows)
-Resize −  Resize +   Rotate   Rotate-rev   Pad-cycle       (bottom row)
-```
-
-Tap `TG(AERO)` again (right inner thumb) to leave.
+> Carried over from my previous Iris keymap — it is **not** in the current Oryx
+> export. Delete the `_AERO` layer (and its `TG(_AERO)` on FN) if you don't use it.
 
 ---
 
 ## Switching base layout
 
-On **MEDIA**, bottom-row left: `DF(_QWERTY)` / `DF(_COLEMAK)` (persists at
-runtime, but a reset always boots **Colemak**). Board color shows which is
-active: **red = QWERTY**, **blue = Colemak**.
-
----
-
-## Per-layer colors
-
-| Layer | Color |
-|---|---|
-| QWERTY (base) | red |
-| Colemak (base) | blue |
-| NAV (toggled on) | green |
-| SYM (active) | gold |
-| NUM (toggled on) | orange |
-| MEDIA | teal |
-| AERO (toggled on) | purple |
-
-Colors are `*_noeeprom`, so they never overwrite your saved RGB settings.
+On **FN**, bottom-row left: `DF(_QWERTY)` / `DF(_COLEMAK)`. Persists at runtime,
+but a reset always boots **Colemak**. Board color shows which is active:
+**red = QWERTY**, **blue = Colemak**.
 
 ---
 
 ## Tuning
 
-No tap-hold keys, so no `TAPPING_TERM` / `PERMISSIVE_HOLD` tuning. Instead:
+No tap-hold keys, so no `TAPPING_TERM` / `PERMISSIVE_HOLD`. Instead:
 
-- `ONESHOT_TIMEOUT 3000` — a queued one-shot mod waits 3 s for its next key.
+- `ONESHOT_TIMEOUT 3000` — a queued one-shot waits 3 s for its next key.
 - `ONESHOT_TAP_TOGGLE 2` — double-tap any one-shot to lock it on.
+- `LAYER_LOCK_IDLE_TIMEOUT 5000` — a locked layer releases after 5 s idle.
+- `COMBO_TERM 40` — combo window.
 
 ---
 
@@ -245,4 +275,4 @@ qmk compile -kb keebio/iris_ce/rev1 -km matthew
 qmk flash   -kb keebio/iris_ce/rev1 -km matthew   # put a half in bootloader first
 ```
 
-Split board: flash each half separately (`QK_BOOT` is on MEDIA, top-right).
+Split board: flash each half separately (`QK_BOOT` is on FN, right side).
