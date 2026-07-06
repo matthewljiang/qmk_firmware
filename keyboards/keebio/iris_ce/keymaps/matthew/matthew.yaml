@@ -1,64 +1,7 @@
 layout: {qmk_keyboard: keebio/iris_ce/rev1, layout_name: LAYOUT}
 layers:
-  QWERTY:
-  - QK GESC
-  - '1'
-  - '2'
-  - '3'
-  - '4'
-  - '5'
-  - '6'
-  - '7'
-  - '8'
-  - '9'
-  - '0'
-  - TT MEDIA
-  - TG NAV
-  - Q
-  - W
-  - E
-  - R
-  - T
-  - Y
-  - U
-  - I
-  - O
-  - P
-  - TG NUM
-  - ESC
-  - A
-  - S
-  - D
-  - F
-  - G
-  - H
-  - J
-  - K
-  - L
-  - ;
-  - ''''
-  - Caps Word
-  - Z
-  - X
-  - C
-  - V
-  - B
-  - ENT
-  - BSPC
-  - N
-  - M
-  - ','
-  - .
-  - /
-  - ''
-  - ''
-  - SPC
-  - OSL SYM
-  - TG AERO
-  - ''
-  - ''
   Colemak:
-  - QK GESC
+  - ''
   - '1'
   - '2'
   - '3'
@@ -69,8 +12,8 @@ layers:
   - '8'
   - '9'
   - '0'
-  - TT MEDIA
-  - TG NAV
+  - ''
+  - ''
   - Q
   - W
   - F
@@ -81,7 +24,7 @@ layers:
   - U
   - Y
   - ;
-  - TG NUM
+  - ''
   - ESC
   - A
   - R
@@ -94,7 +37,7 @@ layers:
   - I
   - O
   - ''''
-  - Caps Word
+  - ''
   - Z
   - X
   - C
@@ -108,13 +51,13 @@ layers:
   - .
   - /
   - ''
-  - ''
+  - OSL( FN)
+  - LGUI
   - SPC
-  - OSL SYM
-  - TG AERO
-  - ''
-  - ''
-  SYM:
+  - {t: LSFT, h: sticky}
+  - SPC
+  - OSL( NAV)
+  NAV:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -127,64 +70,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '`'
-  - '['
-  - ']'
-  - <
-  - '>'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - _
-  - +
-  - '|'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '~'
-  - '{'
-  - '}'
-  - (
-  - )
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '-'
-  - '='
-  - \
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: SYM, type: held}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  NAV (arrows):
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: NAV, type: held}
+  - QK LLCK
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -197,10 +83,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - OSM Ctrl
-  - OSM Alt
-  - OSM Cmd
-  - OSM Shift
+  - {t: LCTL, h: sticky}
+  - {t: LALT, h: sticky}
+  - {t: LGUI, h: sticky}
+  - {t: LSFT, h: sticky}
   - {t: ▽, type: trans}
   - LEFT
   - DOWN
@@ -228,78 +114,21 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  NUM:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '7'
-  - '8'
-  - '9'
-  - {t: ▽, type: trans}
-  - {t: NUM, type: held}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '4'
-  - '5'
-  - '6'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '1'
-  - '2'
-  - '3'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '0'
-  MEDIA / RGB:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: MEDIA, type: held}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  FN:
+  - F11
+  - F1
+  - F2
+  - F3
+  - F4
+  - F5
+  - F6
+  - F7
+  - F8
+  - F9
+  - F10
+  - F12
+  - QK LLCK
+  - RM TOGG
   - VOLD
   - VOLU
   - MUTE
@@ -310,7 +139,7 @@ layers:
   - RM NEXT
   - RM PREV
   - QK BOOT
-  - {t: ▽, type: trans}
+  - MAC LOCK
   - MPRV
   - MSTP
   - MPLY
@@ -319,22 +148,20 @@ layers:
   - {t: ▽, type: trans}
   - RM VALU
   - RM VALD
-  - {t: ▽, type: trans}
-  - RM TOGG
+  - RM SPDU
+  - RM SPDD
   - EE CLR
   - {t: ▽, type: trans}
   - SLEP
   - WAKE
-  - DF( QWERTY)
-  - DF( COLEMAK)
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - RM SATU
   - RM SATD
-  - RM SPDU
-  - RM SPDD
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -342,74 +169,35 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  AERO (AeroSpace):
-  - {t: ▽, type: trans}
-  - WS 1
-  - WS 2
-  - WS 3
-  - WS 4
-  - WS 5
-  - Focus prev
-  - Focus next
-  - Tiles
-  - Accordion
-  - Fullscreen
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Move▸WS1
-  - Move▸WS2
-  - Move▸WS3
-  - Move▸WS4
-  - Move▸WS5
-  - {t: ▽, type: trans}
-  - Move ←
-  - Move ↓
-  - Move ↑
-  - Move →
-  - Floating
-  - {t: ▽, type: trans}
-  - WS Z
-  - WS G
-  - WS S
-  - Close
-  - New win
-  - {t: ▽, type: trans}
-  - Focus ←
-  - Focus ↓
-  - Focus ↑
-  - Focus →
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Move▸WSZ
-  - Move▸WSG
-  - Move▸WSS
-  - Resize mode
-  - Service mode
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Resize −
-  - Resize +
-  - Rotate
-  - Rotate rev
-  - Pad cycle
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: AERO, type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
 combos:
 - {p: [14, 15], k: TAB, l: [Colemak]}
-- {p: [20, 21], k: ENTER, l: [Colemak]}
+- {p: [20, 21], k: ENT, l: [Colemak]}
 - {p: [13, 14], k: ESC, l: [Colemak]}
-- {p: [46, 47], k: DEL, l: [Colemak]}
 - {p: [19, 20], k: BSPC, l: [Colemak]}
-- {p: [25, 26], k: Ctrl, l: [Colemak]}
-- {p: [26, 27], k: Alt, l: [Colemak]}
-- {p: [27, 28], k: Cmd, l: [Colemak]}
-- {p: [25, 28], k: Shift, l: [Colemak]}
-- {p: [33, 34], k: Ctrl, l: [Colemak]}
-- {p: [32, 33], k: Alt, l: [Colemak]}
-- {p: [31, 32], k: Cmd, l: [Colemak]}
-- {p: [31, 34], k: Shift, l: [Colemak]}
+- {p: [25, 26, 27, 28], k: FN, l: [Colemak]}
+- {p: [28, 29], k: Ctrl, l: [Colemak]}
+- {p: [30, 31], k: Alt, l: [Colemak]}
+- {p: [13, 25], k: '1', l: [Colemak]}
+- {p: [14, 26], k: '2', l: [Colemak]}
+- {p: [15, 27], k: '3', l: [Colemak]}
+- {p: [16, 28], k: '4', l: [Colemak]}
+- {p: [17, 29], k: '5', l: [Colemak]}
+- {p: [18, 30], k: '6', l: [Colemak]}
+- {p: [19, 31], k: '7', l: [Colemak]}
+- {p: [20, 32], k: '8', l: [Colemak]}
+- {p: [21, 33], k: '9', l: [Colemak]}
+- {p: [34, 35], k: '0', l: [Colemak]}
+- {p: [25, 26], k: '`', l: [Colemak]}
+- {p: [31, 32], k: '-', l: [Colemak]}
+- {p: [32, 33], k: '=', l: [Colemak]}
+- {p: [33, 34], k: '\', l: [Colemak]}
+- {p: [37, 38], k: '<', l: [Colemak]}
+- {p: [38, 39], k: '{', l: [Colemak]}
+- {p: [39, 40], k: '[', l: [Colemak]}
+- {p: [40, 41], k: '(', l: [Colemak]}
+- {p: [44, 45], k: ')', l: [Colemak]}
+- {p: [45, 46], k: ']', l: [Colemak]}
+- {p: [46, 47], k: '}', l: [Colemak]}
+- {p: [47, 48], k: '>', l: [Colemak]}

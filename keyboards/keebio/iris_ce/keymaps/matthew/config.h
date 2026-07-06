@@ -11,7 +11,7 @@
 
 // A queued one-shot waits this long (ms) for its next keypress before giving up
 // -- generous so you're never rushed between the mod/layer tap and the key.
-#define ONESHOT_TIMEOUT 3000
+#define ONESHOT_TIMEOUT 1500
 
 // Tapping a one-shot this many times in a row locks it on (tap once more to
 // release). Single tap = one-shot; double tap = locked. Applies to OSM and OSL,
@@ -34,7 +34,3 @@
 // stops ordinary rolls (and the A+R grave vs. A+R+S+T launcher overlap) from
 // misfiring.
 #define COMBO_TERM 40
-
-// Enable the combo_should_trigger() hook (keymap.c) so the programming-word
-// combos can be gated to the _WORD layer and the base combos suppressed there.
-#define COMBO_SHOULD_TRIGGER

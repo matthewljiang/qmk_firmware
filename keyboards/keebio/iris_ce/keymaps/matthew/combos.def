@@ -1,0 +1,44 @@
+// CM(name, output, keys...) -- one line per combo. Consumed by X-macro
+// expansion in keymap.c (once to build the PROGMEM key arrays, once to build
+// key_combos[]). Keys are Colemak positions, so combos fire on the base layer.
+
+// Utility
+CM(combo_tab,  KC_TAB,     KC_W, KC_F)
+CM(combo_ent,  KC_ENT,     KC_U, KC_Y)
+CM(combo_esc,  KC_ESC,     KC_Q, KC_W)
+CM(combo_bspc, KC_BSPC,    KC_L, KC_U)
+
+// Layer launcher: all four left home keys -> one-shot FN
+CM(combo_fn,   OSL(_FN),   KC_A, KC_R, KC_S, KC_T)
+
+// Modifiers: one-shot Ctrl / Alt on inner-index pairs
+CM(combo_ctl,  OSM(MOD_LCTL), KC_T, KC_G)
+CM(combo_alt,  OSM(MOD_LALT), KC_N, KC_M)
+
+// Numbers: vertical same-finger pairs (top row + home row)
+CM(combo_1, KC_1, KC_Q, KC_A)
+CM(combo_2, KC_2, KC_W, KC_R)
+CM(combo_3, KC_3, KC_F, KC_S)
+CM(combo_4, KC_4, KC_P, KC_T)
+CM(combo_5, KC_5, KC_B, KC_G)
+CM(combo_6, KC_6, KC_J, KC_M)
+CM(combo_7, KC_7, KC_L, KC_N)
+CM(combo_8, KC_8, KC_U, KC_E)
+CM(combo_9, KC_9, KC_Y, KC_I)
+CM(combo_0, KC_0, KC_QUOT, KC_O)
+
+// Symbols: horizontal home-row pairs (Shift for ~ _ + |)
+CM(combo_grv,  KC_GRV,  KC_A, KC_R)
+CM(combo_mins, KC_MINS, KC_N, KC_E)
+CM(combo_eql,  KC_EQL,  KC_E, KC_I)
+CM(combo_bsls, KC_BSLS, KC_I, KC_O)
+
+// Brackets: horizontal bottom-row pairs, open (left) next to close (right)
+CM(combo_labk, KC_LABK, KC_Z, KC_X)
+CM(combo_lcbr, KC_LCBR, KC_X, KC_C)
+CM(combo_lbrc, KC_LBRC, KC_C, KC_D)
+CM(combo_lprn, KC_LPRN, KC_D, KC_V)
+CM(combo_rprn, KC_RPRN, KC_K, KC_H)
+CM(combo_rbrc, KC_RBRC, KC_H, KC_COMM)
+CM(combo_rcbr, KC_RCBR, KC_COMM, KC_DOT)
+CM(combo_rabk, KC_RABK, KC_DOT, KC_SLSH)
