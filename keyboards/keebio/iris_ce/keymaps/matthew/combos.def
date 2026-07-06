@@ -25,7 +25,7 @@ CM(combo_6, KC_6, KC_J, KC_M)
 CM(combo_7, KC_7, KC_L, KC_N)
 CM(combo_8, KC_8, KC_U, KC_E)
 CM(combo_9, KC_9, KC_Y, KC_I)
-CM(combo_0, KC_0, KC_QUOT, KC_O)
+CM(combo_0, KC_0, KC_SCLN, KC_O)
 
 // Symbols: horizontal home-row pairs (Shift for ~ _ + |)
 CM(combo_grv,  KC_GRV,  KC_A, KC_R)

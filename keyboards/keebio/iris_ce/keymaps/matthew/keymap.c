@@ -16,27 +16,27 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_COLEMAK] = LAYOUT(
-     KC_NO,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_NO,
-     KC_NO,   KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                               KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_NO,
-     KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                               KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-     KC_NO,   KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_ENT,        KC_BSPC,    KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-              OSL(_FN),      KC_LGUI, KC_SPC,                  OSM(MOD_LSFT), KC_SPC, OSL(_NAV)
+     KC_NO,  KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_NO,
+     KC_NO,  KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,                     KC_J,   KC_L,   KC_U,   KC_Y,   KC_SCLN,KC_NO,
+     KC_ESC, KC_A,   KC_R,   KC_S,   KC_T,   KC_G,                     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,   KC_QUOT,
+     KC_NO,  KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,   KC_ENT, KC_BSPC,KC_K,   KC_H,   KC_COMM,KC_DOT, KC_SLSH,KC_NO,
+              OSL(_FN), OSM(MOD_LGUI), KC_SPC,   OSM(MOD_LSFT), OSL(_NAV), KC_SPC
   ),
 
   [_NAV] = LAYOUT(
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
-     QK_LLCK, _______, _______, _______, _______, _______,                            KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______,
-     _______, OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), OSM(MOD_LSFT), _______,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
-     _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______,
-                                    _______, _______, _______,                   _______, _______, _______
+     _______,_______,      _______,      _______,      _______,      _______,                  _______,_______,_______,_______,_______,_______,
+     QK_LLCK,_______,      _______,      _______,      _______,      _______,                  KC_HOME,KC_PGDN,KC_PGUP,KC_END, _______,_______,
+     _______,OSM(MOD_LCTL),OSM(MOD_LALT),OSM(MOD_LGUI),OSM(MOD_LSFT),_______,                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,_______,_______,
+     _______,_______,      _______,      _______,      _______,      _______,_______,_______,_______,_______,_______,_______,_______,_______,
+              _______, _______, _______,   _______, _______, _______
   ),
 
   [_FN] = LAYOUT(
-     KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                               KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
-     QK_LLCK, RM_TOGG, KC_VOLD, KC_VOLU, KC_MUTE, _______,                            _______, RM_HUEU, RM_HUED, RM_NEXT, RM_PREV, QK_BOOT,
-     MAC_LOCK,KC_MPRV, KC_MSTP, KC_MPLY, KC_MNXT, _______,                            _______, RM_VALU, RM_VALD, RM_SPDU, RM_SPDD, EE_CLR,
-     _______, KC_SLEP, KC_WAKE, _______, _______, _______, _______,  _______, _______, RM_SATU, RM_SATD, _______, _______, _______,
-                                    _______, _______, _______,                   _______, _______, _______
+     KC_F11,  KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,                    KC_F6,  KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F12,
+     QK_LLCK, RM_TOGG,KC_VOLD,KC_VOLU,KC_MUTE,_______,                  _______,RM_HUEU,RM_HUED,RM_NEXT,RM_PREV,QK_BOOT,
+     MAC_LOCK,KC_MPRV,KC_MSTP,KC_MPLY,KC_MNXT,_______,                  _______,RM_VALU,RM_VALD,RM_SPDU,RM_SPDD,EE_CLR,
+     _______, KC_SLEP,KC_WAKE,_______,_______,_______,_______,_______,RM_SATU,RM_SATD,_______,_______,_______,_______,
+              _______, _______, _______,   _______, _______, _______
   )
 };
 
