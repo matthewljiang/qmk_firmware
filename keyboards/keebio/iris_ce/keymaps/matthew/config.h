@@ -19,12 +19,6 @@
 // Caps Lock.
 #define ONESHOT_TAP_TOGGLE 2
 
-// ----- Layer lock (QK_LLCK) -----
-//
-// A locked layer (NAV / FN) auto-releases after this many ms of inactivity, so
-// you can't get stranded on a layer if you walk away mid-edit.
-#define LAYER_LOCK_IDLE_TIMEOUT 5000
-
 // ----- Combos -----
 //
 // This layout leans heavily on combos: numbers, symbols, brackets, Tab/Enter/

@@ -55,8 +55,8 @@ layers:
   - LGUI
   - SPC
   - {t: LSFT, h: sticky}
-  - SPC
   - OSL( NAV)
+  - ''
   NAV:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -70,16 +70,16 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - QK LLCK
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - HOME
-  - PGDN
-  - PGUP
-  - END
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -127,7 +127,7 @@ layers:
   - F9
   - F10
   - F12
-  - QK LLCK
+  - {t: ▽, type: trans}
   - RM TOGG
   - VOLD
   - VOLU
@@ -172,13 +172,13 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
 combos:
-- {p: [14, 15], k: TAB, l: [Colemak]}
-- {p: [20, 21], k: ENT, l: [Colemak]}
-- {p: [13, 14], k: ESC, l: [Colemak]}
-- {p: [19, 20], k: BSPC, l: [Colemak]}
+# utility -- bottom row
+- {p: [45, 46], k: BSPC, l: [Colemak]}
+- {p: [46, 47], k: ENT, l: [Colemak]}
+- {p: [38, 39], k: TAB, l: [Colemak]}
+# layer launcher -- left home keys
 - {p: [25, 26, 27, 28], k: FN, l: [Colemak]}
-- {p: [28, 29], k: Ctrl, l: [Colemak]}
-- {p: [30, 31], k: Alt, l: [Colemak]}
+# numbers -- vertical (top over home)
 - {p: [13, 25], k: '1', l: [Colemak]}
 - {p: [14, 26], k: '2', l: [Colemak]}
 - {p: [15, 27], k: '3', l: [Colemak]}
@@ -189,15 +189,18 @@ combos:
 - {p: [20, 32], k: '8', l: [Colemak]}
 - {p: [21, 33], k: '9', l: [Colemak]}
 - {p: [34, 35], k: '0', l: [Colemak]}
+# brackets -- horizontal top row
+- {p: [13, 14], k: '<', l: [Colemak]}
+- {p: [14, 15], k: '{', l: [Colemak]}
+- {p: [15, 16], k: '[', l: [Colemak]}
+- {p: [16, 17], k: '(', l: [Colemak]}
+- {p: [18, 19], k: ')', l: [Colemak]}
+- {p: [19, 20], k: ']', l: [Colemak]}
+- {p: [20, 21], k: '}', l: [Colemak]}
+- {p: [21, 22], k: '>', l: [Colemak]}
+# symbols -- home row
 - {p: [25, 26], k: '`', l: [Colemak]}
+- {p: [29, 30], k: +, l: [Colemak]}
 - {p: [31, 32], k: '-', l: [Colemak]}
 - {p: [32, 33], k: '=', l: [Colemak]}
 - {p: [33, 34], k: '\', l: [Colemak]}
-- {p: [37, 38], k: '<', l: [Colemak]}
-- {p: [38, 39], k: '{', l: [Colemak]}
-- {p: [39, 40], k: '[', l: [Colemak]}
-- {p: [40, 41], k: '(', l: [Colemak]}
-- {p: [44, 45], k: ')', l: [Colemak]}
-- {p: [45, 46], k: ']', l: [Colemak]}
-- {p: [46, 47], k: '}', l: [Colemak]}
-- {p: [47, 48], k: '>', l: [Colemak]}
