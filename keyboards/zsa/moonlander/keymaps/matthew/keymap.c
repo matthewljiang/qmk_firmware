@@ -35,6 +35,8 @@ enum custom_layers {
 #define FN_HOME   LT(_FN,  KC_HOME)
 #define FN_END    LT(_FN,  KC_END)
 #define SYM_BSPC  LT(_SYM, KC_BSPC)
+#define WM_TAB    LT(_WM,  KC_TAB)
+#define NAV_SPC   LT(_NAV, KC_SPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -44,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    FN_HOME,           FN_END,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_SPC,           WM_TAB,            NAV_SPC,          KC_SPC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,
-                                        KC_ENT,  KC_LGUI, KC_NO,             KC_RALT, SYM_BSPC, KC_NO
+                                        KC_ENT,  KC_LGUI, KC_NO,             QK_LEAD, SYM_BSPC, KC_NO
   ),
 
   [_COLEMAK] = LAYOUT(
@@ -53,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    FN_HOME,           FN_END,  KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                                KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_SPC,           WM_TAB,            NAV_SPC,          KC_SPC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,
-                                        KC_ENT,  KC_LGUI, KC_NO,             KC_RALT, SYM_BSPC, KC_NO
+                                        KC_ENT,  KC_LGUI, KC_NO,             QK_LEAD, SYM_BSPC, KC_NO
   ),
 
   // Function / numpad / system layer -- hold either inner-index key (the
@@ -167,6 +169,55 @@ combo_t key_combos[] = {
     COMBO(combo_ralt, OSM(MOD_RALT)),
     COMBO(combo_rctl, OSM(MOD_RCTL)),
 };
+
+// Leader sequences -- QK_LEAD on the right thumb. Two-key sequences starting
+// with T = tmux commands (prefix = C-a), so tmux never needs a Ctrl chord.
+void leader_end_user(void) {
+    if      (leader_sequence_two_keys(KC_T, KC_C)) SEND_STRING(SS_LCTL("a") "c");   // new window
+    else if (leader_sequence_two_keys(KC_T, KC_N)) SEND_STRING(SS_LCTL("a") "n");   // next window
+    else if (leader_sequence_two_keys(KC_T, KC_P)) SEND_STRING(SS_LCTL("a") "p");   // prev window
+    else if (leader_sequence_two_keys(KC_T, KC_S)) SEND_STRING(SS_LCTL("a") "\"");  // split horiz
+    else if (leader_sequence_two_keys(KC_T, KC_V)) SEND_STRING(SS_LCTL("a") "%");   // split vert
+    else if (leader_sequence_two_keys(KC_T, KC_D)) SEND_STRING(SS_LCTL("a") "d");   // detach
+    else if (leader_sequence_two_keys(KC_T, KC_SPC)) SEND_STRING(SS_LCTL("a"));     // bare prefix
+    // -- kill (t k <p/w/s>): command mode, no confirm prompt
+    else if (leader_sequence_three_keys(KC_T, KC_K, KC_P)) SEND_STRING(SS_LCTL("a") ":kill-pane\n");
+    else if (leader_sequence_three_keys(KC_T, KC_K, KC_W)) SEND_STRING(SS_LCTL("a") ":kill-window\n");
+    else if (leader_sequence_three_keys(KC_T, KC_K, KC_S)) SEND_STRING(SS_LCTL("a") ":kill-session\n");
+
+    // AeroSpace (leader -> A -> ...): sends the ctrl+alt(+shift) chords from
+    // aerospace.toml. Duplicates the _WM layer, kept for parity with the Iris.
+    // Workspace 1-9 switching omitted -- the _WM num row already sends it.
+    // -- focus window (m/n/e/i = left/down/up/right)
+    else if (leader_sequence_two_keys(KC_A, KC_M)) SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_LEFT))));
+    else if (leader_sequence_two_keys(KC_A, KC_N)) SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_DOWN))));
+    else if (leader_sequence_two_keys(KC_A, KC_E)) SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_UP))));
+    else if (leader_sequence_two_keys(KC_A, KC_I)) SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_RGHT))));
+    else if (leader_sequence_two_keys(KC_A, KC_K)) SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_TAB))));           // focus next
+    else if (leader_sequence_two_keys(KC_A, KC_B)) SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_TAB))))); // focus prev
+    // -- move window (A W <dir>)
+    else if (leader_sequence_three_keys(KC_A, KC_W, KC_M)) SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_LEFT)))));
+    else if (leader_sequence_three_keys(KC_A, KC_W, KC_N)) SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_DOWN)))));
+    else if (leader_sequence_three_keys(KC_A, KC_W, KC_E)) SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_UP)))));
+    else if (leader_sequence_three_keys(KC_A, KC_W, KC_I)) SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_RGHT)))));
+    // -- layout
+    else if (leader_sequence_two_keys(KC_A, KC_T)) SEND_STRING(SS_LCTL(SS_LALT("/")));               // tiles
+    else if (leader_sequence_two_keys(KC_A, KC_C)) SEND_STRING(SS_LCTL(SS_LALT(",")));               // accordion
+    else if (leader_sequence_two_keys(KC_A, KC_F)) SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(" "))));      // floating toggle
+    else if (leader_sequence_two_keys(KC_A, KC_Z)) SEND_STRING(SS_LCTL(SS_LALT("f")));               // native fullscreen
+    // -- window
+    else if (leader_sequence_two_keys(KC_A, KC_R)) SEND_STRING(SS_LCTL(SS_LALT("o")));               // rotate
+    else if (leader_sequence_two_keys(KC_A, KC_O)) SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT("o"))));      // rotate reverse
+    else if (leader_sequence_two_keys(KC_A, KC_P)) SEND_STRING(SS_LCTL(SS_LALT("p")));               // cycle padding
+    else if (leader_sequence_two_keys(KC_A, KC_COMM)) SEND_STRING(SS_LCTL(SS_LALT("-")));            // resize smaller
+    else if (leader_sequence_two_keys(KC_A, KC_DOT))  SEND_STRING(SS_LCTL(SS_LALT("=")));            // resize bigger
+    else if (leader_sequence_two_keys(KC_A, KC_X)) SEND_STRING(SS_LCTL(SS_LALT("q")));               // close window
+    else if (leader_sequence_two_keys(KC_A, KC_ENT)) SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_ENT))));   // new Ghostty window
+    else if (leader_sequence_two_keys(KC_A, KC_D)) SEND_STRING(SS_LCTL(SS_LALT("w")));               // workspace -> next monitor
+    // -- modes
+    else if (leader_sequence_two_keys(KC_A, KC_SCLN)) SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(";"))));   // service mode
+    else if (leader_sequence_two_keys(KC_A, KC_SLSH)) SEND_STRING(SS_LCTL(SS_LALT("r")));            // resize mode
+}
 
 // Set a solid color from an HSV_* macro while KEEPING the current brightness.
 // The macro's value component is intentionally ignored and replaced with

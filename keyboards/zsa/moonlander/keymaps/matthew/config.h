@@ -29,3 +29,12 @@
 // Modifiers fire from two-finger adjacent home-row rolls. Keep the window
 // tight so normal typing rolls don't misfire a mod.
 #define COMBO_TERM 40
+
+// ----- Leader -----
+//
+// QK_LEAD sits on the right thumb (was KC_RALT). Sequences are two-/three-key,
+// namespaced by first key (T tmux, A aerospace). PER_KEY_TIMING resets the timer
+// on every key, so the window applies per keypress -- abandoned sequences time
+// out without rushing you mid-sequence.
+#define LEADER_TIMEOUT 200
+#define LEADER_PER_KEY_TIMING

@@ -1,0 +1,234 @@
+layout: {qmk_keyboard: keebio/iris_ce/rev1, layout_name: LAYOUT}
+layers:
+  Base:
+  - ''
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - '`'
+  - Q
+  - W
+  - F
+  - P
+  - B
+  - J
+  - L
+  - U
+  - Y
+  - ;
+  - '\'
+  - ESC
+  - {t: A, h: Ctrl}
+  - {t: R, h: Alt}
+  - {t: S, h: Gui}
+  - {t: T, h: Shift}
+  - G
+  - M
+  - {t: N, h: Shift}
+  - {t: E, h: Gui}
+  - {t: I, h: Alt}
+  - {t: O, h: Ctrl}
+  - ''''
+  - ''
+  - Z
+  - X
+  - C
+  - D
+  - V
+  - ''
+  - BSPC
+  - K
+  - H
+  - ','
+  - .
+  - /
+  - ''
+  - ''
+  - {t: NAV, h: lock}
+  - {t: SPC, h: SYM}
+  - {t: LSFT, h: sticky}
+  - {t: SYM, h: lock}
+  - ''
+  Sym:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - '!'
+  - '@'
+  - '#'
+  - '$'
+  - '%'
+  - '^'
+  - '&'
+  - '*'
+  - '('
+  - ')'
+  - ''
+  - BASE
+  - {t: '1', h: Ctrl}
+  - {t: '2', h: Alt}
+  - {t: '3', h: Gui}
+  - {t: '4', h: Shift}
+  - '5'
+  - '6'
+  - {t: '7', h: Shift}
+  - {t: '8', h: Gui}
+  - {t: '9', h: Alt}
+  - {t: '0', h: Ctrl}
+  - ''
+  - ''
+  - '['
+  - ']'
+  - '{'
+  - '}'
+  - _
+  - ''
+  - ''
+  - '`'
+  - '~'
+  - '-'
+  - '='
+  - +
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  Nav:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - BASE
+  - {t: Ctrl, h: sticky}
+  - {t: Alt, h: sticky}
+  - {t: Gui, h: sticky}
+  - {t: Shift, h: sticky}
+  - ''
+  - ←
+  - ↓
+  - ↑
+  - →
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - {t: MEDIA, h: lock}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  Media:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - BOOT
+  - ''
+  - ''
+  - ''
+  - Bri-
+  - Bri+
+  - ''
+  - Whl←
+  - LMB
+  - M↑
+  - RMB
+  - Whl↑
+  - ''
+  - BASE
+  - Stop
+  - Play
+  - Vol-
+  - Vol+
+  - ''
+  - Whl→
+  - M←
+  - M↓
+  - M→
+  - Whl↓
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+combos:
+- {p: [38, 39], k: TAB, l: [Base]}
+- {p: [45, 46], k: BSPC, l: [Base]}
+- {p: [46, 47], k: ENT, l: [Base]}

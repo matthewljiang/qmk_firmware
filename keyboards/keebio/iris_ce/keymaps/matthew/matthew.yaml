@@ -52,10 +52,10 @@ layers:
   - /
   - ''
   - OSL( FN)
-  - LGUI
+  - OSL( NAV)
   - SPC
   - {t: LSFT, h: sticky}
-  - OSL( NAV)
+  - LGUI
   - ''
   NAV:
   - {t: ▽, type: trans}

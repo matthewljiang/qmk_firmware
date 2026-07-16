@@ -6,7 +6,8 @@
 enum custom_layers {
      _COLEMAK,
      _NAV,
-     _FN
+     _FN,
+     _SHORTCUT // opened by OSL on the right thumb -- edit/system shortcuts
 };
 
 enum custom_keycodes {
@@ -21,7 +22,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_NO,  KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,                     KC_J,   KC_L,   KC_U,   KC_Y,   KC_SCLN,KC_NO,
      KC_ESC, KC_A,   KC_R,   KC_S,   KC_T,   KC_G,                     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,   KC_QUOT,
      KC_NO,  KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,   KC_ENT, KC_BSPC,KC_K,   KC_H,   KC_COMM,KC_DOT, KC_SLSH,KC_NO,
-              OSL(_FN), OSM(MOD_LGUI), KC_SPC,                        OSM(MOD_LSFT), OSL(_NAV), KC_NO
+              OSL(_FN), MO(_NAV), KC_SPC,                        OSM(MOD_LSFT), OSL(_SHORTCUT), KC_NO
   ),
 
   [_NAV] = LAYOUT(
@@ -38,7 +39,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      MAC_LOCK,KC_MPRV,KC_MSTP,KC_MPLY,KC_MNXT,_______,                  _______,RM_VALU,RM_VALD,RM_SPDU,RM_SPDD,EE_CLR,
      _______, KC_SLEP,KC_WAKE,_______,_______,_______,_______,_______,RM_SATU,RM_SATD,_______,_______,_______,_______,
               _______, _______, _______,   _______, _______, _______
-  )
+  ),
+
+  // _SHORTCUT -- opened by OSL on the right thumb; left hand fires one shortcut.
+  // Edit ops sit under their Colemak-DH legends so they read as mnemonics:
+  //   Z/X/C/V = undo / cut / copy / paste     R = redo (Cmd-Shift-Z)
+  //   A = select-all   S = save   F = find   G = find-next   W = close (Cmd-W)
+  //   T = tmux prefix (C-a).
+  // Unused keys fall through to _COLEMAK -- BAILOUT (top-left) stays reachable
+  // to escape, at the cost of a slip typing its base letter.
+  [_SHORTCUT] = LAYOUT(
+     _______,_______,   _______,        _______,     _______,   _______,                  _______,_______,_______,_______,_______,_______,
+     _______,_______,   LGUI(KC_W),     LGUI(KC_F),  _______,   _______,                  _______,_______,_______,_______,_______,_______,
+     _______,LGUI(KC_A),LSFT(LGUI(KC_Z)),LGUI(KC_S), LCTL(KC_A),LGUI(KC_G),               _______,_______,_______,_______,_______,_______,
+     _______,LGUI(KC_Z),LGUI(KC_X),     LGUI(KC_C),  _______,   LGUI(KC_V),_______,_______,_______,_______,_______,_______,_______,_______,
+                   _______, _______, _______,                              _______, _______, _______
+  ),
 };
 
 // ===== Combos =================================================================
@@ -104,6 +120,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             break;
         case _FN:
             set_solid_hs(HSV_TEAL);
+            break;
+        case _SHORTCUT:
+            set_solid_hs(HSV_MAGENTA);   // "shortcut armed"
             break;
         default:
             apply_base_layer_rgb();
